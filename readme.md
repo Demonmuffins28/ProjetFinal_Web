@@ -1,1 +1,1 @@
-Auteur: Charles Morin, Amine Benslimane
+Auteurs: Charles Morin, Amine Benslimane, Marc-Olivier Lalonde
