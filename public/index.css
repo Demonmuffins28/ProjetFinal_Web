@@ -1,5 +1,6 @@
 body {
   background-color: rgb(77, 77, 77);
+  padding-left: 20rem;
 }
 
 .vertical-nav {
@@ -32,4 +33,50 @@ body {
 hr {
   color: white;
   margin-top: -1rem;
+}
+
+.frmModificationProfil {
+  padding-left: 10rem;
+  padding-right: 40rem;
+}
+
+.inputFields:disabled,
+.inputFields {
+  background-color: rgb(100, 100, 100);
+  border-color: #f0f0f0;
+  color: #f0f0f0;
+}
+
+.headerProfil {
+  color: #f0f0f0;
+  font-weight: 700;
+}
+
+.col-form-label {
+  color: #f0f0f0;
+  font-weight: 400;
+  font-size: large;
+}
+
+.btn-primary {
+  margin-top: 2rem;
+}
+
+.btnPass:hover {
+  color: #0B5ED7;
+}
+
+.form-check-input {
+  margin-top: .8rem
+}
+
+.imgProfil {
+  float: right;
+  padding-right: 10rem;
+  padding-top: 5rem;
+}
+
+.btnImgProfil {
+  max-width: 350px;
+  min-width: 350px;
 }

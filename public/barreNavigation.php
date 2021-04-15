@@ -1,3 +1,21 @@
+<?php
+session_start();
+
+function parametre($strIDParam)
+{
+  return filter_input(INPUT_GET, $strIDParam, FILTER_SANITIZE_SPECIAL_CHARS) .
+    filter_input(INPUT_POST, $strIDParam, FILTER_SANITIZE_SPECIAL_CHARS);
+}
+
+$_SESSION["binConnecter"] = isset($_SESSION["binConnecter"]) ? $_SESSION["binConnecter"] : false;
+// Si connecter redirection vers la page connexion
+if ($_SESSION["binConnecter"]) {
+  header("Location: connexion.php");
+  exit();
+}
+
+$binAffichageAnnonce = true;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +52,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link text-light font-italic">
+          <a href="gestionProfil.php" class="nav-link text-light font-italic">
             <i class="fa fa-address-card text-primary fa-fw"></i>
             Modifié votre profil
           </a>
@@ -48,6 +66,7 @@
       </ul>
     </div>
 
+    <?php if ($binAffichageAnnonce) { ?>
     <div class="px-2 py-4">
       <p class="nav_Categories font-weight-bold text-uppercase">Filtré par:</p>
       <hr>
@@ -78,7 +97,7 @@
         </li>
       </ul>
     </div>
-
+    <?php } ?>
     <div class="px-3 mt-auto">
       <div class="media d-flex align-items-center px-2"><img src="../images/profil1.jpg" alt="..." width="50"
           height="50" class="mr-3 rounded-circle shadow-sm">
