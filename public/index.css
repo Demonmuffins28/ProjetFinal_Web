@@ -1,3 +1,7 @@
+body {
+  background-color: rgb(77, 77, 77);
+}
+
 .vertical-nav {
   min-width: 20rem;
   width: 20rem;
