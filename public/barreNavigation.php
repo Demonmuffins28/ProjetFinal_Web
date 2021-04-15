@@ -13,8 +13,6 @@ if ($_SESSION["binConnecter"]) {
   header("Location: connexion.php");
   exit();
 }
-
-$binAffichageAnnonce = true;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +38,7 @@ $binAffichageAnnonce = true;
       <hr>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a href="#" class="nav-link text-light font-italic">
+          <a href="menuPrincipale" class="nav-link text-light font-italic">
             <i class="fa fa-th-large text-primary fa-fw"></i>
             Afficher tous les annonces
           </a>
