@@ -9,6 +9,7 @@
 
         //Création de la session
         session_start();
+        require_once("libValidation.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,27 +56,27 @@
                     <form class="d-flex flex-column justify-content-start align-items-center h-75 w-100">
 
 
-                        <div class="form-group col-6 p-3">
+                        <div class="form-group col-6 p-5">
                             <label><h1>Ouvrir une session</h1></label>
                         </div>
 
                         <!-- Adresse de courriel -->
-                        <div class="form-group col-6 p-3">
-                            <input type="email" id="email" name="email" class="form-control" placeholder="Adresse courriel" style="font-size : 20px;"/>
+                        <div class="form-group has-feedback col-6 p-4">
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Adresse courriel" style="font-size : 20px; "/>
                         </div>
 
                         <!-- Mot de passe -->
-                        <div class="form-group col-6 p-3">
+                        <div class="form-group col-6 p-4">
                             <input type="password" id="password" name="password" class="form-control" placeholder="Mot de Passe" style="font-size : 20px;"/>
                         </div>
 
                         <!-- Bouton connexion -->
-                        <div class="form-group col-6 p-3">
-                            <input type="submit" id="btnConnexion" class="btn btn-primary btn-block w-100 font" value="Connexion" style="font-size : 25px;" />
+                        <div class="form-group col-6 p-4">
+                            <input type="submit" id="btnConnexion" class="btn btn-primary btn-block w-100" value="Connexion" style="font-size : 30px;" />
                         </div>
 
                         <!-- Mot de passe oublié? -->
-                        <a href="#" class="link-secondary p-5"><h5>Mot de passe oublié?<h5></a>
+                        <a href="#" class="link-secondary py-5" style="padding-top;"><h5>Mot de passe oublié?<h5></a>
 
                     </form>
 
@@ -83,5 +84,10 @@
             </div>
         </div>
     </body>
+
+    <script>
+     test();
+    
+    </script>
 
 </html>
