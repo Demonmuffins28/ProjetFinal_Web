@@ -1,5 +1,12 @@
 <?php
-require_once("accueil.php");
+    require_once("accueil.php");
+
+    //Recupérer l'adresse courriel de la requete post
+    $strEmail = isset($_POST["email"]) ? $_POST["email"] : null;
+    //Regarder si elle existe
+    //Si oui, envoyé un courriel a cette adresse avec le mot de passe
+    //Si non, envoyé un message indiquant l'adresse indiqué n'existe pas
+
 ?>
 
 <div class="col-7 h-100">
