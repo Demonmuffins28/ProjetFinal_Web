@@ -9,7 +9,7 @@ require_once("accueil.php");
                         <a class="btn btn-primary" style="width: 20%;" href="connexion.php" role="button"><h4>Retour</h4></a>
                     </div>
 
-                    <form class="d-flex flex-column justify-content-start align-items-center h-75 w-100" method="POST" action="oublierMotDePasse.php">
+                    <form class="d-flex flex-column justify-content-start align-items-center h-75 w-100" id="idMotDePasseOublier" method="POST" action="oublierMotDePasse.php">
 
                         <div class="form-group col-6 p-4">
                             <label><h1>Mot de passe oublié</h1></label>

@@ -16,7 +16,7 @@
                         <a class="btn btn-primary" style="width: 20%;" href="inscription.php" role="button"><h4>S'inscrire!</h4></a>
                     </div>
 
-                    <form class="d-flex flex-column justify-content-start align-items-center h-75 w-100" method="POST" action="connexion.php">
+                    <form class="d-flex flex-column justify-content-start align-items-center h-75 w-100" id="idConnexion" method="POST" action="connexion.php">
 
                         <div class="form-group col-6 p-4">
                             <label><h1>Ouvrir une session</h1></label>
