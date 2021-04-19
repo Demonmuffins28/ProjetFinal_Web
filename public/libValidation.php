@@ -1,9 +1,7 @@
 <?php
-/**
- * Validation en php
- */
-
-
+    /**
+     * Validation en php
+     */
  
 ?>
 
@@ -11,6 +9,7 @@
 /**
   * Validation en JS
   */
+
   function validationEmail(strEmail){
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(strEmail);
   }

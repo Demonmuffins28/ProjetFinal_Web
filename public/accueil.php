@@ -12,6 +12,9 @@
         <script defer src="../node_modules/@fortawesome/fontawesome-free/js/brands.js"></script>
         <script defer src="../node_modules/@fortawesome/fontawesome-free/js/solid.js"></script>
         <script defer src="../node_modules/@fortawesome/fontawesome-free/js/fontawesome.js"></script>
+        <!-- JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        
     </head>
     <style>
         html,body {
