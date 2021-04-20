@@ -1,3 +1,27 @@
+<?php
+session_start();
+
+require_once("classe-mysql.php");
+
+function parametre($strIDParam)
+{
+  return filter_input(INPUT_GET, $strIDParam, FILTER_SANITIZE_SPECIAL_CHARS) .
+    filter_input(INPUT_POST, $strIDParam, FILTER_SANITIZE_SPECIAL_CHARS);
+}
+
+$_SESSION["binConnecter"] = isset($_SESSION["binConnecter"]) ? $_SESSION["binConnecter"] : false;
+// Si connecter redirection vers la page connexion
+if ($_SESSION["binConnecter"]) {
+  header("Location: connexion.php");
+  exit();
+}
+
+$strInfosSensibles = "../dbconfig.php";
+$mysql = new mysql($strInfosSensibles);
+
+$strCouleur = parametre("couleurProfil");
+$strCouleur = "#e66465";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +46,7 @@
       <hr>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a href="#" class="nav-link text-light font-italic">
+          <a href="menuPrincipale" class="nav-link text-light font-italic">
             <i class="fa fa-th-large text-primary fa-fw"></i>
             Afficher tous les annonces
           </a>
@@ -34,7 +58,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link text-light font-italic">
+          <a href="gestionProfil.php" class="nav-link text-light font-italic">
             <i class="fa fa-address-card text-primary fa-fw"></i>
             Modifié votre profil
           </a>
@@ -48,6 +72,7 @@
       </ul>
     </div>
 
+    <?php if ($binAffichageAnnonce) { ?>
     <div class="px-2 py-4">
       <p class="nav_Categories font-weight-bold text-uppercase">Filtré par:</p>
       <hr>
@@ -78,15 +103,15 @@
         </li>
       </ul>
     </div>
-
+    <?php } ?>
     <div class="px-3 mt-auto">
-      <div class="media d-flex align-items-center px-2"><img src="../images/profil1.jpg" alt="..." width="50"
-          height="50" class="mr-3 rounded-circle shadow-sm">
+      <div class="media d-flex align-items-center px-2">
+        <label id="userImgWrap" style="background-color:<?= $strCouleur ?>; margin-top:-2.5rem"></label>
         <div class="media-body">
-          <h4 class="">Nom_Utilisateur</h4>
           <p class="font-weight-dark text-muted px-3" style=" margin-top: -1.5rem">Connecté en tant que:</p>
           <p class=" font-weight-dark text-muted px-3" style=" margin-top: -1rem">Nom_Utilisateur</p>
         </div>
+
       </div>
     </div>
 
