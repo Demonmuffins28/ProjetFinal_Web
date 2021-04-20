@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+require_once("classe-mysql.php");
+
 function parametre($strIDParam)
 {
   return filter_input(INPUT_GET, $strIDParam, FILTER_SANITIZE_SPECIAL_CHARS) .
@@ -13,6 +15,12 @@ if ($_SESSION["binConnecter"]) {
   header("Location: connexion.php");
   exit();
 }
+
+$strInfosSensibles = "localhost.php";
+$mysql = new mysql($strInfosSensibles);
+
+$strCouleur = parametre("couleurProfil");
+$strCouleur = "#e66465";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -97,13 +105,13 @@ if ($_SESSION["binConnecter"]) {
     </div>
     <?php } ?>
     <div class="px-3 mt-auto">
-      <div class="media d-flex align-items-center px-2"><img src="../images/profil1.jpg" alt="..." width="50"
-          height="50" class="mr-3 rounded-circle shadow-sm">
+      <div class="media d-flex align-items-center px-2">
+        <label id="userImgWrap" style="background-color:<?= $strCouleur ?>; margin-top:-2.5rem"></label>
         <div class="media-body">
-          <h4 class="">Nom_Utilisateur</h4>
           <p class="font-weight-dark text-muted px-3" style=" margin-top: -1.5rem">Connecté en tant que:</p>
           <p class=" font-weight-dark text-muted px-3" style=" margin-top: -1rem">Nom_Utilisateur</p>
         </div>
+
       </div>
     </div>
 

@@ -4,7 +4,6 @@ $binAffichageAnnonce = false;
 require_once("barreNavigation.php");
 
 $strNom = parametre("nom");
-$strNom = "Marco";
 $strPrenom = parametre("prenom");
 $strEmail = parametre("email");
 $strTelMaison = parametre("telMaison");
@@ -13,13 +12,18 @@ $strTelCellulaire = parametre("telCellulaire");
 $strStatus = parametre("status");
 $strNumUtil = parametre("numero");
 $strPublic = parametre("checkPublic");
-$strImgProfil = parametre("imgProfil");
-$strImgProfil = "../images/profil1.jpg";
+$strCouleur = parametre("couleurProfil");
+$strCouleur = "#e66465";
 ?>
 
 <div class="imgProfil">
-  <img src="<?= $strImgProfil ?>" width="350" height="350" class="rounded-circle shadow-sm row" />
-  <input class="row btnImgProfil" type="file" id=imgProfil name="imgProfil" accept="../images/*">
+  <label id="test_wrapper" style="background-color:<?= $strCouleur ?>">
+    <div>
+      <div class="colText">Clicker sur la couleur pour changer votre
+        couleur de profil</div>
+      <input type="color" id="primary_color" class="field-radio" name="primary-color" @change="changeColor()">
+    </div>
+  </label>
 </div>
 
 <form class="frmModificationProfil" method="get" action="" style="margin-top: 30px">
@@ -95,7 +99,13 @@ $strImgProfil = "../images/profil1.jpg";
   </div>
   <button type="submit" class="btn btn-primary">Ajouter les modifications</button>
 </form>
-
+<script>
+let color_picker = document.getElementById("primary_color");
+let color_picker_wrapper = document.getElementById("test_wrapper");
+color_picker.onchange = function() {
+  color_picker_wrapper.style.background = color_picker.value;
+}
+</script>
 </body>
 
 </html>
