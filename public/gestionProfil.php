@@ -132,10 +132,15 @@ if (!isset($_GET['modifApporter'])) {
 <?php
 } else {
 ?>
-<h1 style=" padding-left: 10rem; padding-right: 35rem; padding-top: 10rem">Les modifications sur votre profil on été
+<h1 style=" padding-left: 10rem; padding-right: 35rem; padding-top: 10rem; color: #f0f0f0;">Les modifications sur votre
+  profil on été
   ajouter avec succès.
   <?= $strPublic ?></h1>
-
+<div style="padding-left: 10rem; padding-right: 30rem">
+  <a class="btn btn-primary" style="width: 10%;" href="gestionProfil.php" role="button">
+    <h4>Retour</h4>
+  </a>
+</div>
 <?php
 }
 ?>
@@ -144,6 +149,10 @@ let color_picker = document.getElementById("primary_color");
 let color_picker_wrapper = document.getElementById("test_wrapper");
 color_picker.onchange = function() {
   color_picker_wrapper.style.background = color_picker.value;
+}
+
+if (window.history.replaceState) {
+  window.history.replaceState(null, null, window.location.href);
 }
 </script>
 </body>
