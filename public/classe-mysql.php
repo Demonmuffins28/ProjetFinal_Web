@@ -106,6 +106,7 @@ class mysql
       */
   function modifieChamp($strNomTable, $strNomChamp, $strNouvelleDefinition)
   {
+    //$sql = 'UPDATE ' .$strNomTable. ' SET ' .$strNomChamp. ' WHERE'
   }
   /*
       |----------------------------------------------------------------------------------|

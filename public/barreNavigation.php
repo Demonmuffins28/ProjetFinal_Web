@@ -16,7 +16,7 @@ if ($_SESSION["binConnecter"]) {
   exit();
 }
 
-$strInfosSensibles = "localhost.php";
+$strInfosSensibles = "../dbconfig.php";
 $mysql = new mysql($strInfosSensibles);
 
 $strCouleur = parametre("couleurProfil");

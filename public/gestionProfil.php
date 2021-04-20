@@ -3,19 +3,44 @@ $binAffichageAnnonce = false;
 
 require_once("barreNavigation.php");
 
-$strNom = parametre("nom");
-$strPrenom = parametre("prenom");
-$strEmail = parametre("email");
-$strTelMaison = parametre("telMaison");
-$strTelTravail = parametre("telTravail");
-$strTelCellulaire = parametre("telCellulaire");
-$strStatus = parametre("status");
-$strNumUtil = parametre("numero");
+$strNumUtil = parametre("email");
+$strNumUtil = "2";
+
+if (!isset($_GET['modifApporter'])) {
+  $sql = 'SELECT * FROM utilisateurs WHERE NoUtilisateur=:id';
+  $query = $mysql->cBD->prepare($sql);
+  $query->bindValue(':id', $strNumUtil, PDO::PARAM_STR);
+  $query->execute();
+  $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+  foreach ($result as $user) {
+    $strNom = $user['Nom'];
+    $strPrenom = $user['Prenom'];
+    $strEmail = $user['Courriel'];
+    $strTelMaison = $user['NoTelMaison'];
+    $strTelTravail = $user['NoTelTravail'];
+    $strTelCellulaire = $user['NoTelCellulaire'];
+    $strStatus = $user['Statut'];
+    $strNumUtil = $user['NoUtilisateur'];
+  }
+} else {
+  $strNom = parametre("nom");
+  $strPrenom = parametre("prenom");
+  $strEmail = parametre("email");
+  $strTelMaison = parametre("telMaison");
+  $strTelTravail = parametre("telTravail");
+  $strTelCellulaire = parametre("telCellulaire");
+
+  $sql = 'UPDATE utilisateurs SET Nom=?, Prenom=?, Courriel=?, NoTelMaison=?, NoTelTravail=?, NoTelCellulaire=? WHERE NoUtilisateur=?';
+  $query = $mysql->cBD->prepare($sql)->execute([$strNom, $strPrenom, $strEmail, $strTelMaison, $strTelTravail, $strTelCellulaire, $strNumUtil]);
+}
+
 $strPublic = parametre("checkPublic");
 $strCouleur = parametre("couleurProfil");
 $strCouleur = "#e66465";
-?>
 
+if (!isset($_GET['modifApporter'])) {
+?>
 <div class="imgProfil">
   <label id="test_wrapper" style="background-color:<?= $strCouleur ?>">
     <div>
@@ -41,13 +66,13 @@ $strCouleur = "#e66465";
   <div class="row mb-3">
     <label for="inputPrenom" class="col-sm-3 col-form-label">Prenom</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control inputFields" id="inputPrenom" name="prenom">
+      <input type="text" class="form-control inputFields" id="inputPrenom" name="prenom" value="<?= $strPrenom ?>">
     </div>
   </div>
   <div class="row mb-3">
     <label for="inputCourriel" class="col-sm-3 col-form-label">Courriel</label>
     <div class="col-sm-8">
-      <input type="email" class="form-control inputFields" id="inputCourriel" name="email">
+      <input type="email" class="form-control inputFields" id="inputCourriel" name="email" value="<?= $strEmail ?>">
     </div>
   </div>
   <div class="row mb-3">
@@ -61,32 +86,37 @@ $strCouleur = "#e66465";
       <br />(facultatif)
     </label>
     <div class="col-sm-8">
-      <input type="text" class="form-control inputFields" id="inputTeleMaison" name="telMaison">
+      <input type="text" class="form-control inputFields" id="inputTeleMaison" name="telMaison"
+        value="<?= $strTelMaison ?>">
     </div>
   </div>
   <div class="row mb-3">
     <label for="inputTeleTravail" class="col-sm-4 col-form-label">Téléphone (poste) au travail
       <br />(facultatif)</label>
     <div class="col-sm-7">
-      <input type="text" class="form-control inputFields" id="inputTeleTravail" name="telTravail">
+      <input type="text" class="form-control inputFields" id="inputTeleTravail" name="telTravail"
+        value="<?= $strTelTravail ?>">
     </div>
   </div>
   <div class="row mb-3">
     <label for="inputCellulaire" class="col-sm-3 col-form-label">Téléphone cellulaire <br />(facultatif)</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control inputFields" id="inputCellulaire" name="telCellulaire">
+      <input type="text" class="form-control inputFields" id="inputCellulaire" name="telCellulaire"
+        value="<?= $strTelCellulaire ?>">
     </div>
   </div>
   <div class="row mb-3">
     <label for="selectStatut" class="col-sm-3 col-form-label">Status de l'utilisateur</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control inputFields" id="selectStatut" disabled value="En attente" name="status">
+      <input type="text" class="form-control inputFields" id="selectStatut" disabled name="status"
+        value="<?= $strStatus ?>">
     </div>
   </div>
   <div class="row mb-3">
     <label for="affichageNumUtil" class="col-sm-3 col-form-label">Numéro de l'utilisateur</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control inputFields" id="affichageNumUtil" disabled value="999" name="numero">
+      <input type="text" class="form-control inputFields" id="affichageNumUtil" disabled name="numero"
+        value="<?= $strNumUtil ?>">
     </div>
   </div>
   <div class="col-sm-10">
@@ -97,8 +127,18 @@ $strCouleur = "#e66465";
       </label>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Ajouter les modifications</button>
+  <button type="submit" class="btn btn-primary" name="modifApporter">Ajouter les modifications</button>
 </form>
+<?php
+} else {
+?>
+<h1 style=" padding-left: 10rem; padding-right: 35rem; padding-top: 10rem">Les modifications sur votre profil on été
+  ajouter avec succès.
+  <?= $strPublic ?></h1>
+
+<?php
+}
+?>
 <script>
 let color_picker = document.getElementById("primary_color");
 let color_picker_wrapper = document.getElementById("test_wrapper");
