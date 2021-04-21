@@ -1,12 +1,6 @@
 <?php
     require_once("accueil.php");
-
-    //Recupérer l'adresse courriel de la requete post
-    $strEmail = isset($_POST["email"]) ? $_POST["email"] : null;
-    //Regarder si elle existe
-    //Si oui, envoyé un courriel a cette adresse avec le mot de passe
-    //Si non, envoyé un message indiquant l'adresse indiqué n'existe pas
-
+    require_once("libValidation.php");
 ?>
 
 <div class="col-7 h-100">
@@ -18,27 +12,64 @@
 
                     <form class="d-flex flex-column justify-content-start align-items-center h-75 w-100" id="idMotDePasseOublier" method="POST" action="oublierMotDePasse.php">
 
-                        <div class="form-group col-6 p-4">
+                        <div class="form-group col-6 p-4 text-center">
                             <label><h1>Mot de passe oublié</h1></label>
                         </div>
 
-                        <div class="form-group has-feedback col-6 p-4">
-                            <label><h5>Veuillez entrer votre adresse de courriel ci-dessous et nous vous enverrons un courriel pour recupérer votre mot de passe.</h5></label>
+                        <div class="form-group has-feedback col-6 p-4 text-center">
+                            <label><h5 id="message">Veuillez entrer votre adresse de courriel ci-dessous et nous vous enverrons un courriel pour recupérer votre mot de passe.</h5></label>
                         </div>
 
                         <!-- Adresse de courriel -->
-                        <div class="form-group has-feedback col-6 p-4">
+                        <div class="form-group has-feedback col-6 p-4 text-center">
+                            <label for="email" class="text-danger" id="lblMessageErreur" style="font-size : 20px;"></label>
                             <input type="email" id="email" name="email" class="form-control" placeholder="Adresse courriel" style="font-size : 20px; "/>
                         </div>
 
                         <!-- Bouton envoyer un courriel -->
                         <div class="form-group col-6 p-4">
-                            <input type="submit" id="btnConnexion" class="btn btn-primary btn-block w-100" value="Envoyer un courriel" style="font-size : 30px; font-weigth" />
+                            <input type="button" class="btn btn-primary btn-block w-100" id="btnConnexion" value="Envoyer un courriel" style="font-size : 30px;"/>
                         </div>
-
                     </form>
 
                 </div>
             </div>
         </div>
+
+        <script>
+            // Validation
+            $(document).ready(function () {
+                $('#btnConnexion').click(function () {
+                    $('#lblMessageErreur').html("");
+                    let binValider = true;
+                    if ($('#email').val().trim() == ''){
+                        binValider = false;
+                        $('#lblMessageErreur').html("Veuillez entrer un email");
+                    }
+                    else if (!validationEmail($('#email').val().trim())){
+                        binValider = false;
+                        $('#lblMessageErreur').html("Le email entrer est invalid");
+                    }
+                    else if (!ajax('ValidationEmailExisteEtEnvoie.php', 'post', {email: $('#email').val().trim()})){
+                        binValider = false;
+                        $('#lblMessageErreur').html("Le email entrer n'existe pas");
+                    }
+                    if (binValider){
+                        $('#email').hide();
+                        $('#btnConnexion').hide();
+                        $('#message').html("Votre mot de passe vous a été envoyé par email");
+                    }
+                });
+            });
+
+            function ajax(url, type, data){
+                binEmailExiste = $.ajax({
+                                    url: url,
+                                    type: type,
+                                    data: data,
+                                    async: false
+                                }).responseText
+                return binEmailExiste;
+            }
+        </script>
     </body>

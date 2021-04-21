@@ -1,4 +1,5 @@
 <?php
+
 $binAffichageAnnonce = false;
 
 require_once("barreNavigation.php");
