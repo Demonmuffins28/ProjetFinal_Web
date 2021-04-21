@@ -19,8 +19,21 @@ if ($_SESSION["binConnecter"]) {
 $strInfosSensibles = "../dbconfig.php";
 $mysql = new mysql($strInfosSensibles);
 
-$strCouleur = parametre("couleurProfil");
-$strCouleur = "#e66465";
+// Temporaire
+$strNumUtil = parametre("email");
+$strNumUtil = "2";
+
+$sql = 'SELECT Prenom, Nom, CouleurProfil FROM utilisateurs WHERE NoUtilisateur=:id';
+$query = $mysql->cBD->prepare($sql);
+$query->bindValue(':id', $strNumUtil, PDO::PARAM_STR);
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($result as $user) {
+  $strPrenom = $user["Prenom"];
+  $strNom = $user["Nom"];
+  $strCouleur = $user["CouleurProfil"];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -111,7 +124,7 @@ $strCouleur = "#e66465";
         <label id="userImgWrap" style="background-color:<?= $strCouleur ?>; margin-top:-2.5rem"></label>
         <div class="media-body">
           <p class="font-weight-dark text-muted px-3" style=" margin-top: -1.5rem">Connecté en tant que:</p>
-          <p class=" font-weight-dark text-muted px-3" style=" margin-top: -1rem">Nom_Utilisateur</p>
+          <p class=" font-weight-dark text-muted px-3" style=" margin-top: -1rem"><?= $strPrenom . " " . $strNom ?></p>
         </div>
 
       </div>

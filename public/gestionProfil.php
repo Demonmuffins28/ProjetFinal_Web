@@ -44,28 +44,21 @@ if (!isset($_GET['modifApporter'])) {
   if (parametre("checkMaison") == "on") $strTelMaison .= "P";
   else $strTelMaison .= "N";
   $strTelTravail = parametre("telTravail");
-  if (parametre("telTravail") == "on") $strTelTravail .= "P";
+  if (parametre("checkTravail") == "on") $strTelTravail .= "P";
   else $strTelTravail .= "N";
   $strTelCellulaire = parametre("telCellulaire");
-  if (parametre("telCellulaire") == "on") $strTelCellulaire .= "P";
+  if (parametre("checkCellulaire") == "on") $strTelCellulaire .= "P";
   else $strTelCellulaire .= "N";
   $strStatut = parametre("statut");
   $strNoEmpl = parametre("numeroEmpl");
   $strCouleur = parametre("primary-color");
 
-  var_dump($strNom);
-  var_dump($strPrenom);
-  var_dump($strEmail);
-  var_dump($strTelMaison);
-  var_dump($strTelTravail);
-  var_dump($strTelCellulaire);
-  var_dump($strStatut);
-  var_dump($strNoEmpl);
-  var_dump($strCouleur);
-  var_dump($strNumUtil);
-
-  $sql = 'UPDATE utilisateurs SET Nom=?, Prenom=?, Courriel=?, NoTelMaison=?, NoTelTravail=?, NoTelCellulaire=?, Statut=?, NoEmpl=? CouleurProfil=? WHERE NoUtilisateur=?';
-  $query = $mysql->cBD->prepare($sql)->execute([$strNom, $strPrenom, $strEmail, $strTelMaison, $strTelTravail, $strTelCellulaire, $strStatut, $strNoEmpl, $strCouleur, $strNumUtil]);
+  try {
+    $sql = 'UPDATE utilisateurs SET Nom=?, Prenom=?, Courriel=?, NoTelMaison=?, NoTelTravail=?, NoTelCellulaire=?, Statut=?, NoEmpl=?, CouleurProfil=? WHERE NoUtilisateur=?';
+    $query = $mysql->cBD->prepare($sql)->execute([$strNom, $strPrenom, $strEmail, $strTelMaison, $strTelTravail, $strTelCellulaire, $strStatut, $strNoEmpl, $strCouleur, $strNumUtil]);
+  } catch (Exception $e) {
+    die("Erreur dans la requete!");
+  }
 }
 
 if (!isset($_GET['modifApporter'])) {
@@ -116,8 +109,8 @@ if (!isset($_GET['modifApporter'])) {
     <div class="col-sm-8">
       <input type="text" class="form-control inputFields" id="inputTeleMaison" name="telMaison"
         value="<?= $strTelMaison ?>">
-      <input class="telCheck" type="checkbox" id="gridCheck" name="checkMaison" <?= $strCheckMaison ?>>
-      <label class="telCheck" for="gridCheck">
+      <input class="telCheck" type="checkbox" id="gridCheckMaison" name="checkMaison" <?= $strCheckMaison ?>>
+      <label class="telCheck" for="gridCheckMaison">
         Rendre cette information public lors de l'affichage d'annonce?
       </label>
     </div>
@@ -128,8 +121,8 @@ if (!isset($_GET['modifApporter'])) {
     <div class="col-sm-7">
       <input type="text" class="form-control inputFields" id="inputTeleTravail" name="telTravail"
         value="<?= $strTelTravail ?>">
-      <input class="telCheck" type="checkbox" id="gridCheck" name="checkTravail" <?= $strCheckTravail ?>>
-      <label class="telCheck" for="gridCheck">
+      <input class="telCheck" type="checkbox" id="gridCheckTravail" name="checkTravail" <?= $strCheckTravail ?>>
+      <label class="telCheck" for="gridCheckTravail">
         Rendre cette information public lors de l'affichage d'annonce?
       </label>
     </div>
@@ -139,8 +132,9 @@ if (!isset($_GET['modifApporter'])) {
     <div class="col-sm-8">
       <input type="text" class="form-control inputFields" id="inputCellulaire" name="telCellulaire"
         value="<?= $strTelCellulaire ?>">
-      <input class="telCheck" type="checkbox" id="gridCheck" name="checkCellulaire" <?= $strCheckCellulaire ?>>
-      <label class="telCheck" for="gridCheck">
+      <input class="telCheck" type="checkbox" id="gridCheckCellulaire" name="checkCellulaire"
+        <?= $strCheckCellulaire ?>>
+      <label class="telCheck" for="gridCheckCellulaire">
         Rendre cette information public lors de l'affichage d'annonce?
       </label>
     </div>
