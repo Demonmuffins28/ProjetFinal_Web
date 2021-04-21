@@ -24,11 +24,11 @@
   }
 
   function validationTelMaisonCellulaire(strTel) {
-    return /^\(\d{3}\)\s\d{3}-\d{4}(P|N)$/.test(strTel);;
+    return /^\(\d{3}\)\s\d{3}-\d{4}$/.test(strTel);;
   }
 
   function validationTelTravail(strTel) {
-    return /^\(\d{3}\)\s\d{3}-\d{4}\s#\d{4}(P|N)$/.test(strTel);;
+    return /^\(\d{3}\)\s\d{3}-\d{4}\s#\d{4}$/.test(strTel);;
   }
 
   function validationStatutUtilisateurs(strStatut) {
