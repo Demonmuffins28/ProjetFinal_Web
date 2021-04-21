@@ -19,7 +19,7 @@
     $fichierUtilisateur->ouvre();
     while (!$fichierUtilisateur->detecteFin()){
        $tValeur = explode(";", $fichierUtilisateur->litLigne());
-       $requete = "INSERT INTO $strNomDeTable VALUES (default,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+       $requete = "INSERT INTO $strNomDeTable VALUES (default,?,?,?,?,?,?,?,?,?,?,?,?,?,default)";
        $preparerExec= $cBD->prepare($requete);
        $preparerExec->execute([$tValeur[1],$tValeur[2],$tValeur[3],$tValeur[4],$tValeur[5],$tValeur[6],$tValeur[7],$tValeur[8],$tValeur[9],$tValeur[10],$tValeur[11],$tValeur[12],$tValeur[13]]);
     }
