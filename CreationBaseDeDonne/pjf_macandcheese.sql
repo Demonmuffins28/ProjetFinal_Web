@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `NoTelCellulaire` varchar(15) DEFAULT NULL,
   `Modification` datetime DEFAULT NULL,
   `AutresInfos` varchar(50) DEFAULT NULL,
+  `CouleurProfil` varchar(10) DEFAULT "#e66465",
   PRIMARY KEY (`NoUtilisateur`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
