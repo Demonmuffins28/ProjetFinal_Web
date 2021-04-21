@@ -50,7 +50,7 @@
                         binValider = false;
                         $('#lblMessageErreur').html("Le email entrer est invalid");
                     }
-                    else if (!ajax('ValidationEmailExisteEtEnvoie.php', 'post', {email: $('#email').val().trim()})){
+                    else if (!uniqueEmail($('#email').val())){
                         binValider = false;
                         $('#lblMessageErreur').html("Le email entrer n'existe pas");
                     }
