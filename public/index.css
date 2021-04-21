@@ -67,14 +67,16 @@ hr {
   color: #0B5ED7;
 }
 
-.form-check-input {
-  margin-top: .8rem
+.telCheck {
+  font-size: smaller;
+  color: #f0f0f0;
 }
 
 .imgProfil {
   float: right;
-  padding-right: 30rem;
+  padding-left: 50%;
   padding-top: 5rem;
+  position: fixed;
 }
 
 #primary_color {

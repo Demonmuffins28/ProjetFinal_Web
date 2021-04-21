@@ -98,29 +98,27 @@ class mysql
       */
   function insereEnregistrement($strNomTable, $tabChamps, $tabValeurs)
   {
-    if(count($tabChamps) == count($tabValeurs)) {
+    if (count($tabChamps) == count($tabValeurs)) {
       //Créer la requete
       $this->requete = "INSERT INTO $strNomTable (";
 
-      for($i = 0; $i < count($tabChamps); $i++) {
-        if($i == count($tabChamps) - 1)
+      for ($i = 0; $i < count($tabChamps); $i++) {
+        if ($i == count($tabChamps) - 1)
           $this->requete .= $tabChamps[$i] . ")  VALUES (";
         else
           $this->requete .= $tabChamps[$i] . ", ";
       }
 
-      for($i = 0; $i < count($tabValeurs); $i++) {
-        if($i == count($tabValeurs) - 1)
-          $this->requete .= "'".$tabValeurs[$i]."'" . ");";
+      for ($i = 0; $i < count($tabValeurs); $i++) {
+        if ($i == count($tabValeurs) - 1)
+          $this->requete .= "'" . $tabValeurs[$i] . "'" . ");";
         else
-          $this->requete .= "'".$tabValeurs[$i]."'" . ", ";
+          $this->requete .= "'" . $tabValeurs[$i] . "'" . ", ";
       }
 
       //Envoyer la requete
       $this->cBD->exec($this->requete);
-
     }
-
   }
 
   /*
@@ -173,16 +171,15 @@ class mysql
       | Retourne un tableau contenant le nom des différentes colonnes de la table
       |----------------------------------------------------------------------------------|
       */
-  function getChampsTable($strNomTable) 
+  function getChampsTable($strNomTable)
   {
     $this->requete = "SELECT column_name
     FROM information_schema.columns
     WHERE table_schema = ? AND table_name = ?;";
 
-    $query =  $this->cBD->prepare($requete);
+    $query =  $this->cBD->prepare($this->requete);
     $query->execute([$this->nomBD, $strNomTable]);
 
     return $query->fetchAll(PDO::FETCH_ASSOC);
   }
-
 }

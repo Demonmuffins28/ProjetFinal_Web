@@ -19,8 +19,21 @@ if ($_SESSION["binConnecter"]) {
 $strInfosSensibles = "../dbconfig.php";
 $mysql = new mysql($strInfosSensibles);
 
-$strCouleur = parametre("couleurProfil");
-$strCouleur = "#e66465";
+// Temporaire
+$strNumUtil = parametre("email");
+$strNumUtil = "2";
+
+$sql = 'SELECT Prenom, Nom, CouleurProfil FROM utilisateurs WHERE NoUtilisateur=:id';
+$query = $mysql->cBD->prepare($sql);
+$query->bindValue(':id', $strNumUtil, PDO::PARAM_STR);
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($result as $user) {
+  $strPrenom = $user["Prenom"];
+  $strNom = $user["Nom"];
+  $strCouleur = $user["CouleurProfil"];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,9 +47,11 @@ $strCouleur = "#e66465";
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="index.css">
+
   <script defer src="../node_modules/@fortawesome/fontawesome-free/js/brands.js"></script>
   <script defer src="../node_modules/@fortawesome/fontawesome-free/js/solid.js"></script>
   <script defer src="../node_modules/@fortawesome/fontawesome-free/js/fontawesome.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -109,7 +124,7 @@ $strCouleur = "#e66465";
         <label id="userImgWrap" style="background-color:<?= $strCouleur ?>; margin-top:-2.5rem"></label>
         <div class="media-body">
           <p class="font-weight-dark text-muted px-3" style=" margin-top: -1.5rem">Connecté en tant que:</p>
-          <p class=" font-weight-dark text-muted px-3" style=" margin-top: -1rem">Nom_Utilisateur</p>
+          <p class=" font-weight-dark text-muted px-3" style=" margin-top: -1rem"><?= $strPrenom . " " . $strNom ?></p>
         </div>
 
       </div>
