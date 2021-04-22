@@ -5,6 +5,23 @@ $binAffichageAnnonce = false;
 require_once("barreNavigation.php");
 require_once("libValidation.php");
 
+// $intNoEmpl = isset($_POST["numeroEmpl"]) ? $_POST["numeroEmpl"] : null;
+// var_dump($intNoEmpl);
+// if ($intNoEmpl != null) {
+//   $sql = "SELECT * FROM utilisateurs WHERE NoEmpl = :NoEmpl";
+//   $query = $mysql->cBD->prepare($sql);
+//   $query->bindValue(':NoEmpl', $intNoEmpl, PDO::PARAM_INT);
+//   $query->execute();
+//   $result = $query->fetchAll(PDO::FETCH_BOTH);
+//   if (count($result) == 0) {
+//     echo false;
+//   } else {
+//     echo true;
+//   }
+// } else {
+//   echo false;
+// }
+
 $strNumUtil = "2";
 
 if (!isset($_POST['modifApporter'])) {
@@ -248,12 +265,10 @@ function isValidForm() {
     );
     binErreur = true;
   }
-  // if (noEmployeExiste($("#numeroEmpl").val()) /*&& $("#numeroEmpl").val() != "<?= $strNoEmpl; ?>"*/ ) {
-  //   alert($("#numeroEmpl").val());
-  //   $("#numeroEmpl").after("<div id='erreur'><p style='color:red'>*Ce numéro d'employé existe déjà</p></div>");
-  //   binErreur = true;
-  // }
-  alert(noEmployeExiste($("#numeroEmpl").val()));
+  if (noEmployeExiste($("#numeroEmpl").val()) /*&& $("#numeroEmpl").val() != "<?= $strNoEmpl; ?>"*/ ) {
+    $("#numeroEmpl").after("<div id='erreur'><p style='color:red'>*Ce numéro d'employé existe déjà</p></div>");
+    binErreur = true;
+  }
 
   if (binErreur) return false;
   return true;

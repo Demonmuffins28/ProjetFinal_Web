@@ -1,6 +1,12 @@
 <?php
+function parametre($strIDParam)
+{
+    return filter_input(INPUT_GET, $strIDParam, FILTER_SANITIZE_SPECIAL_CHARS) .
+        filter_input(INPUT_POST, $strIDParam, FILTER_SANITIZE_SPECIAL_CHARS);
+}
 require_once("../dbconfig.php");
-$intNoEmpl = isset($_POST["numeroEmpl"]) ? $_POST["numeroEmpl"] : null;
+$intNoEmpl = parametre("NoEmpl");
+//console_log($intNoEmpl);
 if ($intNoEmpl != null) {
     $cBD = new PDO("mysql:host=localhost;dbname=$strNomBD", $strNomAdmin, $strMotPasseAdmin);
     $sql = "SELECT * FROM utilisateurs WHERE NoEmpl = :NoEmpl";

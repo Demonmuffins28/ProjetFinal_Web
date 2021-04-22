@@ -64,10 +64,11 @@ function noEmployeExiste(strNoEmpl) {
     url: "ValidationEmpExiste.php",
     type: "post",
     data: {
-      NoEmpl: parseInt(strNoEmpl)
+      NoEmpl: strNoEmpl
     },
     async: false
   }).responseText
   return binNoEmp;
+
 }
 </script>
