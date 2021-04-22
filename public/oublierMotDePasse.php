@@ -50,7 +50,7 @@
                         binValider = false;
                         $('#lblMessageErreur').html("Le email entrer est invalid");
                     }
-                    else if (!emailExiste($('#email').val())){
+                    else if (!emailExisteEtEnvoieMotdePasse($('#email').val())){
                         binValider = false;
                         $('#lblMessageErreur').html("Le email entrer n'existe pas");
                     }
@@ -62,13 +62,13 @@
                 });
             });
 
-            function ajax(url, type, data){
+            function emailExisteEtEnvoieMotdePasse(strEmail) {
                 binEmailExiste = $.ajax({
-                                    url: url,
-                                    type: type,
-                                    data: data,
-                                    async: false
-                                }).responseText
+                url: "EnvoieEmailMotDePasse.php",
+                type: "post",
+                data: {email: strEmail},
+                async: false
+                }).responseText
                 return binEmailExiste;
             }
         </script>
