@@ -55,7 +55,7 @@
 
                         <!-- Bouton création compte -->
                         <div class="form-group col-6 p-4">
-                            <input type="submit" id="btnInscription" class="btn btn-primary btn-block w-100" value="S'inscrire" style="font-size : 30px; font-weigth" />
+                            <input type="submit" id="btnInscription" class="btn btn-primary btn-block w-100" value="S'inscrire" style="font-size : 30px;" />
                         </div>
 
                     </form>

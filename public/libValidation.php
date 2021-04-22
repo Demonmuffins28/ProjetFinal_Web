@@ -47,7 +47,7 @@ function validationNoEmployer(strNoEmployer) {
     return isNaN(parseFloat(strPrix)) ? false : parseFloat(strPrix) >= 0 && parseFloat(strPrix) <= 99999.99
   }
 
-  function uniqueEmail(strEmail) {
+  function emailExiste(strEmail) {
     binEmailExiste = $.ajax({
       url: "ValidationEmailExiste.php",
       type: "post",

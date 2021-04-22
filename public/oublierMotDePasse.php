@@ -50,7 +50,7 @@
                         binValider = false;
                         $('#lblMessageErreur').html("Le email entrer est invalid");
                     }
-                    else if (!uniqueEmail($('#email').val())){
+                    else if (!emailExiste($('#email').val())){
                         binValider = false;
                         $('#lblMessageErreur').html("Le email entrer n'existe pas");
                     }
