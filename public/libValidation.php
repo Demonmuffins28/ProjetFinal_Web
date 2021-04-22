@@ -43,17 +43,31 @@ function validationNoEmployer(strNoEmployer) {
   return /^[1-9]{1}[0-9]{0,3}$/.test(strNoEmployer);
 }
 
-  function validationPrix(strPrix) {
-    return isNaN(parseFloat(strPrix)) ? false : parseFloat(strPrix) >= 0 && parseFloat(strPrix) <= 99999.99
-  }
+function validationPrix(strPrix) {
+  return isNaN(parseFloat(strPrix)) ? false : parseFloat(strPrix) >= 0 && parseFloat(strPrix) <= 99999.99
+}
 
-  function emailExiste(strEmail) {
-    binEmailExiste = $.ajax({
-      url: "ValidationEmailExiste.php",
-      type: "post",
-      data: {email: strEmail},
-      async: false
-    }).responseText
-    return binEmailExiste;
-  }
+function emailExiste(strEmail) {
+  binEmailExiste = $.ajax({
+    url: "ValidationEmailExiste.php",
+    type: "post",
+    data: {
+      email: strEmail
+    },
+    async: false
+  }).responseText
+  return binEmailExiste;
+}
+
+function noEmployeExiste(strNoEmpl) {
+  binNoEmp = $.ajax({
+    url: "ValidationEmpExiste.php",
+    type: "post",
+    data: {
+      NoEmpl: parseInt(strNoEmpl)
+    },
+    async: false
+  }).responseText
+  return binNoEmp;
+}
 </script>

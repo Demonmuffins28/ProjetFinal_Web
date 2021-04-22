@@ -5,10 +5,9 @@ $binAffichageAnnonce = false;
 require_once("barreNavigation.php");
 require_once("libValidation.php");
 
-$strNumUtil = parametre("email");
 $strNumUtil = "2";
 
-if (!isset($_GET['modifApporter'])) {
+if (!isset($_POST['modifApporter'])) {
   $sql = 'SELECT * FROM utilisateurs WHERE NoUtilisateur=:id';
   $query = $mysql->cBD->prepare($sql);
   $query->bindValue(':id', $strNumUtil, PDO::PARAM_STR);
@@ -62,9 +61,9 @@ if (!isset($_GET['modifApporter'])) {
   }
 }
 
-if (!isset($_GET['modifApporter'])) {
+if (!isset($_POST['modifApporter'])) {
 ?>
-<form class=" frmModificationProfil" id="frmSaisi" method="get" action="" style="margin-top: 30px">
+<form class=" frmModificationProfil" id="frmSaisi" method="POST" action="gestionProfil.php" style="margin-top: 30px">
   <div class="imgProfil">
     <label id="test_wrapper" style="background:<?= $strCouleur ?>">
       <div>
@@ -174,10 +173,9 @@ if (!isset($_GET['modifApporter'])) {
     </div>
   </div>
   <div class="row mb-3">
-    <label for="affichageNumUtil" class="col-sm-3 col-form-label">Numéro de l'employé (facultatif)</label>
+    <label for="numeroEmpl" class="col-sm-3 col-form-label">Numéro de l'employé (facultatif)</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control inputFields" id="affichageNumUtil" name="numeroEmpl"
-        value="<?= $strNoEmpl ?>">
+      <input type="text" class="form-control inputFields" id="numeroEmpl" name="numeroEmpl" value="<?= $strNoEmpl ?>">
     </div>
   </div>
   <button type="submit" class="btn btn-primary" id="btnSubmit" name="modifApporter">Ajouter les
@@ -218,6 +216,10 @@ function isValidForm() {
     $("#inputCourriel").after("<div id='erreur'><p style='color:red'>*Le courriel n'est pas valide</p></div>");
     binErreur = true;
   }
+  if (emailExiste($("#inputCourriel").val()) && $("#inputCourriel").val() != "<?= $strEmail; ?>") {
+    $("#inputCourriel").after("<div id='erreur'><p style='color:red'>*Le courriel est déjà utilisé</p></div>");
+    binErreur = true;
+  }
   if (!validationNomPrenom($("#inputNom").val())) {
     $("#inputNom").after(
       "<div id='erreur'><p style='color:red'>*Votre nom contient des charactère non valide</p></div>");
@@ -246,6 +248,12 @@ function isValidForm() {
     );
     binErreur = true;
   }
+  // if (noEmployeExiste($("#numeroEmpl").val()) /*&& $("#numeroEmpl").val() != "<?= $strNoEmpl; ?>"*/ ) {
+  //   alert($("#numeroEmpl").val());
+  //   $("#numeroEmpl").after("<div id='erreur'><p style='color:red'>*Ce numéro d'employé existe déjà</p></div>");
+  //   binErreur = true;
+  // }
+  alert(noEmployeExiste($("#numeroEmpl").val()));
 
   if (binErreur) return false;
   return true;
