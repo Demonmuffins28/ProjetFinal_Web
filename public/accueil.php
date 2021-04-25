@@ -1,3 +1,11 @@
+<?php
+
+require_once("classe-mysql.php");
+$strInfosSensibles = "../dbconfig.php";
+$mysql = new mysql($strInfosSensibles);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

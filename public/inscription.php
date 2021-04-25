@@ -2,18 +2,8 @@
 
     require_once("accueil.php");
     require_once("libValidation.php");
-
-    //Recupérer les 2 adresses courriels de la requete post
-    //$strEmail1 = isset($_POST["email"]) ? $_POST["email"] : null;
-    //$strEmail2 = isset($_POST["email"]) ? $_POST["email"] : null;
-
-    //Recupérer le mot de passe de la requete post
     
 
-    //Regarder si elle existe
-    //if($strEmail != null && $str){}
-    //Si oui, envoyé un courriel a cette adresse avec le mot de passe
-    //Si non, envoyé un message indiquant l'adresse indiqué n'existe pas
 
 ?>
 
@@ -24,7 +14,10 @@
                         <a class="btn btn-primary" style="width: 20%;" href="connexion.php" role="button"><h4>Retour</h4></a>
                     </div>
 
-                    <form class="d-flex flex-column justify-content-start align-items-center h-75 w-100" id="idInscription" method="POST" action="">
+<?php 
+
+?>
+                    <form class="d-flex flex-column justify-content-start align-items-center h-75 w-100" id="idInscription" method="POST" action="inscription.php">
 
                         <div class="form-group col-6 p-4">
                             <label><h1>Inscription</h1></label>
@@ -108,7 +101,13 @@
                         $('label[for="email2"]').html("<h5>Le deux adresses courriels doivent être identiques!</h5>");
                         binSubmit = false;
                     }
-                    
+                    //Regarder si l'email existe deja
+                    else if(emailExiste($("#email1").val())) {
+                        $('label[for="email1"]').show();
+                        $('label[for="email1"]').html("<h5>Cette adresse email est déjà utilisée</h5>");
+                        binSubmit = false;
+                    }
+       
                     //Regarde si le mot de passe est valide
                     if(!validationMotDePasse($("#password1").val())) {
                         $('label[for="password1"]').show();
@@ -122,9 +121,6 @@
                         binSubmit = false;
                     }
                 }
-
-                //Regarder si l'email existe deja
-
                 return binSubmit;
             });
 
