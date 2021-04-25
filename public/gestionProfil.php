@@ -22,8 +22,6 @@ require_once("libValidation.php");
 //   echo false;
 // }
 
-$strNumUtil = "2";
-
 if (!isset($_POST['modifApporter'])) {
   $sql = 'SELECT * FROM utilisateurs WHERE NoUtilisateur=:id';
   $query = $mysql->cBD->prepare($sql);

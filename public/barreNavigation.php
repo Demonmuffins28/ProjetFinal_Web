@@ -20,8 +20,7 @@ $strInfosSensibles = "../dbconfig.php";
 $mysql = new mysql($strInfosSensibles);
 
 // Temporaire
-$strNumUtil = parametre("email");
-$strNumUtil = "2";
+$strNumUtil = $_SESSION["userID"];
 
 $sql = 'SELECT Prenom, Nom, CouleurProfil FROM utilisateurs WHERE NoUtilisateur=:id';
 $query = $mysql->cBD->prepare($sql);
@@ -131,7 +130,7 @@ foreach ($result as $user) {
     </div>
 
     <div class="px-3" style="margin-bottom: 1rem">
-      <a href="#" class="nav-link font-weight-dark text-muted">
+      <a href="deconnexion.php" class="nav-link font-weight-dark text-muted">
         <i class="fas fa-sign-out-alt text-primary fa-fw"></i>
         Déconnexion
       </a>
