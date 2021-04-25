@@ -1,10 +1,11 @@
 <?php 
 
     require_once("accueil.php");
+    require_once("libValidation.php");
 
     //Recupérer les 2 adresses courriels de la requete post
-    $strEmail1 = isset($_POST["email"]) ? $_POST["email"] : null;
-    $strEmail2 = isset($_POST["email"]) ? $_POST["email"] : null;
+    //$strEmail1 = isset($_POST["email"]) ? $_POST["email"] : null;
+    //$strEmail2 = isset($_POST["email"]) ? $_POST["email"] : null;
 
     //Recupérer le mot de passe de la requete post
     
@@ -76,7 +77,7 @@
             $('label[for="password2"]').hide();
 
             //Si la form à été submit
-            $("#idInscription").submit(function(event) {
+            $("#idInscription").on("submit", function(event) {
                 //Regarde si tous les champs sont remplis et non vides
                 let binSubmit = true;
                 console.log($("#email1").val().trim());
@@ -100,9 +101,8 @@
                         binSubmit = false;
                     }
                 }
-                event.preventDefault();
 
-                return false;
+                return binSubmit;
             });
 
         });
