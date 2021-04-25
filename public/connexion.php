@@ -10,6 +10,35 @@
 session_start();
 require_once("libValidation.php");
 require_once("accueil.php");
+
+function accesMenuPrincipale()
+{
+  header("Location: menuPrincipale.php");
+  die();
+}
+
+if (isset($_SESSION["userID"])) {
+  accesMenuPrincipale();
+}
+
+$strEmail = parametre("email");
+$strPassword = parametre("password");
+$strErreurConnexion = "";
+
+$sql = 'SELECT * FROM utilisateurs WHERE Courriel=:email';
+$query = $mysql->cBD->prepare($sql);
+$query->bindValue(':email', $strEmail, PDO::PARAM_STR);
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($result as $user) {
+  if ($strPassword === $user['MotDePasse']) {
+    $_SESSION["userID"] = $user['NoUtilisateur'];
+    accesMenuPrincipale();
+  } else {
+    $strErreurConnexion = "**Le courriel ou le mot de passe n'est pas correct**";
+  }
+}
 ?>
 <div class="col-7 h-100">
   <!-- Bouton s'inscrire -->
@@ -44,6 +73,7 @@ require_once("accueil.php");
     <div class="form-group col-6 p-4">
       <input type="submit" id="btnConnexion" class="btn btn-primary btn-block w-100" value="Connexion"
         style="font-size : 30px;" />
+      <p style="color:red; font-size:20px; text-align:center"><?= $strErreurConnexion ?></p>
     </div>
 
     <!-- Mot de passe oublié? -->
@@ -53,6 +83,26 @@ require_once("accueil.php");
 
   </form>
 </div>
+<script>
+if (window.history.replaceState) {
+  window.history.replaceState(null, null, window.location.href);
+}
+
+$("#idConnexion").on("submit", function() {
+  return isValidForm();
+})
+
+function isValidForm() {
+  let binErreur = false;
+  $("#erreur").remove();
+  if (!validationEmail($("#email").val())) {
+    $("#email").after("<div id='erreur'><p style='color:red; font-size:20px'>*Le courriel n'est pas valide</p></div>");
+    binErreur = true;
+  }
+  if (binErreur) return false;
+  return true;
+}
+</script>
 </body>
 
 </html>
