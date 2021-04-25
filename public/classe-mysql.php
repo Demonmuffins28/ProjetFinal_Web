@@ -99,6 +99,8 @@ class mysql
   function insereEnregistrement($strNomTable, $tabChamps, $tabValeurs)
   {
     if (count($tabChamps) == count($tabValeurs)) {
+      $tabChampType = $this->getChampsType($strNomTable);
+      var_dump($tabChampType);
       //Créer la requete
       $this->requete = "INSERT INTO $strNomTable (";
 
@@ -180,6 +182,18 @@ class mysql
     $query =  $this->cBD->prepare($this->requete);
     $query->execute([$this->nomBD, $strNomTable]);
 
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  function getChampsType($strNomTable)
+  {
+    $this->requete = "SELECT DATA_TYPE
+    FROM information_schema.columns
+    WHERE table_schema = ? AND table_name = ?;";
+
+    $query =  $this->cBD->prepare($this->requete);
+    $query->execute([$this->nomBD, $strNomTable]);
+    
     return $query->fetchAll(PDO::FETCH_ASSOC);
   }
 }

@@ -2,7 +2,19 @@
 
     require_once("accueil.php");
     require_once("libValidation.php");
-    
+
+    //Regarde si la page a été submit
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+        $strEmail = isset($_POST['email1']) ? $_POST["email1"] : null;
+        $strPassword = isset($_POST['password1']) ? $_POST["password1"] : null;
+        if($strEmail != null && $strPassword != null) {
+            //Insérer l'enregistrement dans la base de données
+            $tabChampTable =  $mysql->getChampsType('utilisateurs');
+            var_dump($tabChampTable);
+            //Envoyer un email de confirmation
+            //Changer la page d'inscription
+        }
+    }
 
 
 ?>
@@ -17,7 +29,7 @@
 <?php 
 
 ?>
-                    <form class="d-flex flex-column justify-content-start align-items-center h-75 w-100" id="idInscription" method="POST" action="inscription.php">
+                    <form class="d-flex flex-column justify-content-start align-items-center h-75 w-100" id="idInscription" method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
                         <div class="form-group col-6 p-4">
                             <label><h1>Inscription</h1></label>
@@ -121,6 +133,7 @@
                         binSubmit = false;
                     }
                 }
+
                 return binSubmit;
             });
 
