@@ -25,23 +25,27 @@ $strEmail = parametre("email");
 $strPassword = parametre("password");
 $strErreurConnexion = "";
 
-$sql = 'SELECT * FROM utilisateurs WHERE Courriel=:email';
-$query = $mysql->cBD->prepare($sql);
-$query->bindValue(':email', $strEmail, PDO::PARAM_STR);
-$query->execute();
-$result = $query->fetchAll(PDO::FETCH_ASSOC);
+if($strEmail != '') {
+      $sql = 'SELECT * FROM utilisateurs WHERE Courriel=:email';
+      $query = $mysql->cBD->prepare($sql);
+      $query->bindValue(':email', $strEmail, PDO::PARAM_STR);
+      $query->execute();
+      $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
-foreach ($result as $user) {
-  if ($strPassword === $user['MotDePasse'] && $user['Statut'] != 0) {
-    $_SESSION["userID"] = $user['NoUtilisateur'];
-    accesMenuPrincipale();
-  }
-  else if($strPassword === $user['MotDePasse'] && $user['Statut'] == 0) {
-    $strErreurConnexion = "**Veuillez confirmer votre compte par adresse courriel**";
-  }
-  else {
-    $strErreurConnexion = "**Le courriel ou le mot de passe n'est pas correct**";
-  }
+      if($result != null) {
+        foreach ($result as $user) {
+          if ($strPassword === $user['MotDePasse'] && $user['Statut'] != 0) {
+            $_SESSION["userID"] = $user['NoUtilisateur'];
+            accesMenuPrincipale();
+          }
+          else if($strPassword === $user['MotDePasse'] && $user['Statut'] == 0) {
+            $strErreurConnexion = "**Veuillez confirmer votre compte par adresse courriel**";
+          }
+        }
+      }
+      else {
+        $strErreurConnexion = "**Le courriel ou le mot de passe n'est pas correct**";
+      }
 }
 ?>
 <div class="col-7 h-100">

@@ -49,5 +49,5 @@ body {
     <div class="row h-100">
       <!-- Logo du service d'annonce -->
       <div class="col-5 border-3 border-end border-color h-100 bg-dark border-secondary">
-        <img src="../images/logobd.png" class="img-fluid h-100">
+      <img src="../images/logobd.png" class="img-fluid h-100"> 
       </div>
