@@ -2,6 +2,7 @@
 
     require_once("accueil.php");
     require_once("libValidation.php");
+    require_once("envoyerMail.php");
 
     //Regarde si la page a été submit
     if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -11,8 +12,12 @@
             //Insérer l'enregistrement dans la base de données
             date_default_timezone_set("America/New_York");
             $mysql->insereEnregistrement('utilisateurs', ['Courriel', 'MotDePasse', 'Creation', 'NbConnexions', 'Statut'],          ["'".$strEmail."'", "'".$strPassword."'", "'".date('Y-m-d H:i:s')."'", 0, 0]);
-            //Change l'affichage de la page
-            //Envoyer un email de confirmation
+            $sql = 'SELECT NoUtilisateur FROM utilisateurs WHERE Courriel=:email';
+            $query = $mysql->cBD->prepare($sql);
+            $query->bindValue(':email', $strEmail, PDO::PARAM_STR);
+            $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            envoyerMail($strEmail, "Confirmation de votre compte", "http://localhost/ProjetFinal_Web/public/confirmationCourriel.php?id=".$result[0]['NoUtilisateur']);
 
         }
         //$_SESSION['postdata'] = $_POST;
