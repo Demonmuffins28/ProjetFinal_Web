@@ -111,9 +111,9 @@ class mysql
 
       for ($i = 0; $i < count($tabValeurs); $i++) {
         if ($i == count($tabValeurs) - 1)
-          $this->requete .= "'" . $tabValeurs[$i] . "'" . ");";
+          $this->requete .=  $tabValeurs[$i] . ");";
         else
-          $this->requete .= "'" . $tabValeurs[$i] . "'" . ", ";
+          $this->requete .= $tabValeurs[$i] . ", ";
       }
 
       //Envoyer la requete
@@ -180,6 +180,18 @@ class mysql
     $query =  $this->cBD->prepare($this->requete);
     $query->execute([$this->nomBD, $strNomTable]);
 
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  function getChampsType($strNomTable)
+  {
+    $this->requete = "SELECT COLUMN_NAME, DATA_TYPE
+    FROM information_schema.columns
+    WHERE table_schema = ? AND table_name = ?;";
+
+    $query =  $this->cBD->prepare($this->requete);
+    $query->execute([$this->nomBD, $strNomTable]);
+    
     return $query->fetchAll(PDO::FETCH_ASSOC);
   }
 }

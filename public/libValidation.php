@@ -16,7 +16,7 @@ function validationEmail(strEmail) {
 }
 
 function validationMotDePasse(strMotDePasse) {
-  return strMotDePasse.length >= 5 && strMotDePasse.length <= 15
+  return strMotDePasse.length >= 5 && strMotDePasse.length <= 15 && strMotDePasse.indexOf(' ') == -1;
 }
 
 function validationNomPrenom(strNomPrenom) {

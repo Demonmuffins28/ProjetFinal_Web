@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 //Création de la session
 require_once("classe-mysql.php");
 function parametre($strIDParam)
@@ -9,6 +10,13 @@ function parametre($strIDParam)
 
 $strInfosSensibles = "../dbconfig.php";
 $mysql = new mysql($strInfosSensibles);
+=======
+
+require_once("classe-mysql.php");
+$strInfosSensibles = "../dbconfig.php";
+$mysql = new mysql($strInfosSensibles);
+
+>>>>>>> inscriptionValidation.php
 ?>
 
 <!DOCTYPE html>
