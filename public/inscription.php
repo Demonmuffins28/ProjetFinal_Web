@@ -9,14 +9,18 @@
         $strPassword = isset($_POST['password1']) ? $_POST["password1"] : null;
         if($strEmail != null && $strPassword != null) {
             //Insérer l'enregistrement dans la base de données
-            $tabChampTable =  $mysql->getChampsType('utilisateurs');
-            var_dump($tabChampTable);
+            date_default_timezone_set("America/New_York");
+            $mysql->insereEnregistrement('utilisateurs', ['Courriel', 'MotDePasse', 'Creation', 'NbConnexions', 'Statut'],          ["'".$strEmail."'", "'".$strPassword."'", "'".date('Y-m-d H:i:s')."'", 0, 0]);
+            //Change l'affichage de la page
             //Envoyer un email de confirmation
-            //Changer la page d'inscription
+
         }
+        $_SESSION['postdata'] = $_POST;
+        unset($_POST);
+        header("Location: ".$_SERVER['PHP_SELF']);
+        die();
     }
-
-
+    
 ?>
 
                 <div class="col-7 h-100">
@@ -26,9 +30,6 @@
                         <a class="btn btn-primary" style="width: 20%;" href="connexion.php" role="button"><h4>Retour</h4></a>
                     </div>
 
-<?php 
-
-?>
                     <form class="d-flex flex-column justify-content-start align-items-center h-75 w-100" id="idInscription" method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
                         <div class="form-group col-6 p-4">
@@ -133,7 +134,9 @@
                         binSubmit = false;
                     }
                 }
-
+                if(binSubmit) {
+                    $("#idInscription").hide();
+                }
                 return binSubmit;
             });
 

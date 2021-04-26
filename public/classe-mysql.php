@@ -99,8 +99,6 @@ class mysql
   function insereEnregistrement($strNomTable, $tabChamps, $tabValeurs)
   {
     if (count($tabChamps) == count($tabValeurs)) {
-      $tabChampType = $this->getChampsType($strNomTable);
-      var_dump($tabChampType);
       //Créer la requete
       $this->requete = "INSERT INTO $strNomTable (";
 
@@ -113,9 +111,9 @@ class mysql
 
       for ($i = 0; $i < count($tabValeurs); $i++) {
         if ($i == count($tabValeurs) - 1)
-          $this->requete .= "'" . $tabValeurs[$i] . "'" . ");";
+          $this->requete .=  $tabValeurs[$i] . ");";
         else
-          $this->requete .= "'" . $tabValeurs[$i] . "'" . ", ";
+          $this->requete .= $tabValeurs[$i] . ", ";
       }
 
       //Envoyer la requete
@@ -187,7 +185,7 @@ class mysql
 
   function getChampsType($strNomTable)
   {
-    $this->requete = "SELECT DATA_TYPE
+    $this->requete = "SELECT COLUMN_NAME, DATA_TYPE
     FROM information_schema.columns
     WHERE table_schema = ? AND table_name = ?;";
 
