@@ -19,7 +19,6 @@
         //unset($_POST);
         header("Location: ".$_SERVER['PHP_SELF']);
         die();
-        var_dump($_POST);
     }
     
 ?>
