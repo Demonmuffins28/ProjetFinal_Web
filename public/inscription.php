@@ -15,10 +15,11 @@
             //Envoyer un email de confirmation
 
         }
-        $_SESSION['postdata'] = $_POST;
-        unset($_POST);
+        //$_SESSION['postdata'] = $_POST;
+        //unset($_POST);
         header("Location: ".$_SERVER['PHP_SELF']);
         die();
+        var_dump($_POST);
     }
     
 ?>
@@ -73,6 +74,9 @@
     </body>
 
     <script>
+        if (window.history.replaceState)
+                window.history.replaceState(null, null, window.location.href);
+
         $(document).ready(function() {
 
             $('label[for="email1"]').hide();
@@ -136,7 +140,7 @@
                 }
                 if(binSubmit) {
                     $("#idInscription").hide();
-                }
+                } 
                 return binSubmit;
             });
 
