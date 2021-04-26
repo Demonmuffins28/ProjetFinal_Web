@@ -32,10 +32,14 @@ $query->execute();
 $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($result as $user) {
-  if ($strPassword === $user['MotDePasse']) {
+  if ($strPassword === $user['MotDePasse'] && $user['Statut'] != 0) {
     $_SESSION["userID"] = $user['NoUtilisateur'];
     accesMenuPrincipale();
-  } else {
+  }
+  else if($strPassword === $user['MotDePasse'] && $user['Statut'] == 0) {
+    $strErreurConnexion = "**Veuillez confirmer votre compte par adresse courriel**";
+  }
+  else {
     $strErreurConnexion = "**Le courriel ou le mot de passe n'est pas correct**";
   }
 }
