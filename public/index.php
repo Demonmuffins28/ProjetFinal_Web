@@ -1,3 +1,4 @@
 <?php
-require_once("connexion.php");
+header("Location: connexion.php");
+exit();
 ?>
