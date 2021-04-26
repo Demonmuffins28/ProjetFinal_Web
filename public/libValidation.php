@@ -24,14 +24,23 @@ function validationNomPrenom(strNomPrenom) {
 }
 
 function validationTelMaisonCellulaire(strTel) {
+  if (strTel == "")
+    return true;
+
   return /^\(\d{3}\)\s\d{3}-\d{4}$/.test(strTel);;
 }
 
 function validationTelTravail(strTel) {
+  if (strTel == "")
+    return true;
+
   return /^\(\d{3}\)\s\d{3}-\d{4}\s#\d{4}$/.test(strTel);;
 }
 
 function validationStatutUtilisateurs(strStatut) {
+  if (strStatut == "")
+    return true;
+
   return /^[0-5]{1}$/.test(strStatut);
 }
 
@@ -40,6 +49,9 @@ function validationEtatAnnonce(strEtat) {
 }
 
 function validationNoEmployer(strNoEmployer) {
+  if (strNoEmployer == "")
+    return true;
+
   return /^[1-9]{1}[0-9]{0,3}$/.test(strNoEmployer);
 }
 

@@ -5,23 +5,6 @@ $binAffichageAnnonce = false;
 require_once("barreNavigation.php");
 require_once("libValidation.php");
 
-// $intNoEmpl = isset($_POST["numeroEmpl"]) ? $_POST["numeroEmpl"] : null;
-// var_dump($intNoEmpl);
-// if ($intNoEmpl != null) {
-//   $sql = "SELECT * FROM utilisateurs WHERE NoEmpl = :NoEmpl";
-//   $query = $mysql->cBD->prepare($sql);
-//   $query->bindValue(':NoEmpl', $intNoEmpl, PDO::PARAM_INT);
-//   $query->execute();
-//   $result = $query->fetchAll(PDO::FETCH_BOTH);
-//   if (count($result) == 0) {
-//     echo false;
-//   } else {
-//     echo true;
-//   }
-// } else {
-//   echo false;
-// }
-
 if (!isset($_POST['modifApporter'])) {
   $sql = 'SELECT * FROM utilisateurs WHERE NoUtilisateur=:id';
   $query = $mysql->cBD->prepare($sql);
@@ -179,7 +162,7 @@ if (!isset($_POST['modifApporter'])) {
         }
         ?>
       <select id="idStatut" class="form-select inputFields" name=statut>
-        <option value="9" <?= $select9 ?>>Confirmé</option>
+        <option value="9" <?= $select9 ?>></option>
         <option value="2" <?= $select2 ?>>Cadre</option>
         <option value="3" <?= $select3 ?>>Employé de soutien</option>
         <option value="4" <?= $select4 ?>>Enseigant</option>
@@ -226,45 +209,45 @@ $("#frmSaisi").on("submit", function() {
 
 function isValidForm() {
   let binErreur = false;
-  $("#erreur").remove();
+  $(".erreur").remove();
   if (!validationEmail($("#inputCourriel").val())) {
-    $("#inputCourriel").after("<div id='erreur'><p style='color:red'>*Le courriel n'est pas valide</p></div>");
+    $("#inputCourriel").after("<div class='erreur'><p style='color:red'>*Le courriel n'est pas valide</p></div>");
     binErreur = true;
   }
   if (emailExiste($("#inputCourriel").val()) && $("#inputCourriel").val() != "<?= $strEmail; ?>") {
-    $("#inputCourriel").after("<div id='erreur'><p style='color:red'>*Le courriel est déjà utilisé</p></div>");
+    $("#inputCourriel").after("<div class='erreur'><p style='color:red'>*Le courriel est déjà utilisé</p></div>");
     binErreur = true;
   }
   if (!validationNomPrenom($("#inputNom").val())) {
     $("#inputNom").after(
-      "<div id='erreur'><p style='color:red'>*Votre nom contient des charactère non valide</p></div>");
+      "<div class='erreur'><p style='color:red'>*Votre nom contient des charactère non valide</p></div>");
     binErreur = true;
   }
   if (!validationNomPrenom($("#inputPrenom").val())) {
     $("#inputPrenom").after(
-      "<div id='erreur'><p style='color:red'>*Votre prenom contient des charactère non valide</p></div>");
+      "<div class='erreur'><p style='color:red'>*Votre prenom contient des charactère non valide</p></div>");
     binErreur = true;
   }
   if (!validationTelMaisonCellulaire($("#inputTeleMaison").val())) {
     $("#inputTeleMaison").after(
-      "<div id='erreur'><p style='color:red'>*Le numero de téléphone doit être dans le format (999) 999-9999</p></div>"
+      "<div class='erreur'><p style='color:red'>*Le numero de téléphone doit être dans le format (999) 999-9999</p></div>"
     );
     binErreur = true;
   }
   if (!validationTelMaisonCellulaire($("#inputCellulaire").val())) {
     $("#inputCellulaire").after(
-      "<div id='erreur'><p style='color:red'>*Le numero de téléphone doit être dans le format (999) 999-9999</p></div>"
+      "<div class='erreur'><p style='color:red'>*Le numero de téléphone doit être dans le format (999) 999-9999</p></div>"
     );
     binErreur = true;
   }
   if (!validationTelTravail($("#inputTeleTravail").val())) {
     $("#inputTeleTravail").after(
-      "<div id='erreur'><p style='color:red'>*Le numero de téléphone doit être dans le format (999) 999-9999 #9999</p></div>"
+      "<div class='erreur'><p style='color:red'>*Le numero de téléphone doit être dans le format (999) 999-9999 #9999</p></div>"
     );
     binErreur = true;
   }
-  if (noEmployeExiste($("#numeroEmpl").val()) /*&& $("#numeroEmpl").val() != "<?= $strNoEmpl; ?>"*/ ) {
-    $("#numeroEmpl").after("<div id='erreur'><p style='color:red'>*Ce numéro d'employé existe déjà</p></div>");
+  if (noEmployeExiste($("#numeroEmpl").val()) && $("#numeroEmpl").val() != "<?= $strNoEmpl; ?>") {
+    $("#numeroEmpl").after("<div class='erreur'><p style='color:red'>*Ce numéro d'employé existe déjà</p></div>");
     binErreur = true;
   }
 
