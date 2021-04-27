@@ -18,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     );
     envoyerMail($strEmail, "Confirmation de votre compte", "http://localhost/ProjetFinal_Web/public/confirmationCourriel.php?id=" . $mysql->getNoUtilisateurs($strEmail));
   }
-  
   header("Location: " . $_SERVER['PHP_SELF']);
   die();
 }
