@@ -53,7 +53,7 @@ if (!isset($_POST['modifApporter'])) {
 
   try {
     $sql = 'UPDATE utilisateurs SET Nom=?, Prenom=?, Courriel=?, NoTelMaison=?, NoTelTravail=?, NoTelCellulaire=?, Statut=?, NoEmpl=?, CouleurProfil=? WHERE NoUtilisateur=?';
-    $query = $mysql->cBD->prepare($sql)->execute([$strNom, $strPrenom, $strEmail, $strTelMaison, $strTelTravail, $strTelCellulaire, $strStatut, $strNoEmpl, $strCouleur, $strNumUtil]);
+    $query = $mysql->cBD->prepare($sql)->execute([$strNom, $strPrenom, $strEmail, $strTelMaison, $strTelTravail, $strTelCellulaire, $strStatut, $strNoEmpl == '' ? null:$strNoEmpl, $strCouleur, $strNumUtil]);
   } catch (Exception $e) {
     die("Erreur dans la requete!");
   }
