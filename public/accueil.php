@@ -2,10 +2,10 @@
 //Création de la session
 require_once("classe-mysql.php");
 
-function parametre($strIDParam)
+function parametre($strIDParam, $binGet=false)
 {
-    return filter_input(INPUT_GET, $strIDParam, FILTER_SANITIZE_SPECIAL_CHARS) .
-        filter_input(INPUT_POST, $strIDParam, FILTER_SANITIZE_SPECIAL_CHARS);
+  return !$binGet ? (isset($_POST[$strIDParam]) ? ($_POST[$strIDParam] == ''? null : $_POST[$strIDParam]) : null) : 
+  (isset($_GET[$strIDParam]) ? ($_GET[$strIDParam] == ''? null : $_GET[$strIDParam]) : null);
 }
 
 $strInfosSensibles = "../dbconfig.php";
