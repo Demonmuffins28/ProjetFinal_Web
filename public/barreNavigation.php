@@ -5,8 +5,8 @@ require_once("classe-mysql.php");
 
 function parametre($strIDParam)
 {
-  return filter_input(INPUT_GET, $strIDParam, FILTER_SANITIZE_SPECIAL_CHARS) .
-    filter_input(INPUT_POST, $strIDParam, FILTER_SANITIZE_SPECIAL_CHARS);
+  return filter_input(INPUT_GET, $strIDParam == '' ? null : $strIDParam, FILTER_SANITIZE_SPECIAL_CHARS) .
+    filter_input(INPUT_POST, $strIDParam == '' ? null : $strIDParam, FILTER_SANITIZE_SPECIAL_CHARS);
 }
 
 $_SESSION["binConnecter"] = isset($_SESSION["binConnecter"]) ? $_SESSION["binConnecter"] : false;
