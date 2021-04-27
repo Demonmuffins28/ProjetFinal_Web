@@ -13,7 +13,7 @@
             echo false;
         }
         else {
-            envoyerMail("wiwiwa8764@laraskey.com", "Mot de passe oublier", $result[0]["MotDePasse"]);
+            envoyerMail($strEmail, "Mot de passe oublier", $result[0]["MotDePasse"]);
             echo true;
         }
     }
