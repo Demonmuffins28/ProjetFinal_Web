@@ -11,7 +11,7 @@ function parametre($strIDParam)
 
 $_SESSION["binConnecter"] = isset($_SESSION["binConnecter"]) ? $_SESSION["binConnecter"] : false;
 // Si connecter redirection vers la page connexion
-if ($_SESSION["binConnecter"]) {
+if (!$_SESSION["binConnecter"]) {
   header("Location: connexion.php");
   exit();
 }
