@@ -17,7 +17,7 @@ function accesMenuPrincipale()
   die();
 }
 
-if (isset($_SESSION["userID"])) {
+if (isset($_SESSION["userID"]) && isset($_SESSION["connexionID"])) {
   accesMenuPrincipale();
 }
 
@@ -35,15 +35,12 @@ if ($strEmail != '') {
   if ($result != null) {
     foreach ($result as $user) {
       if ($strPassword === $user['MotDePasse'] && $user['Statut'] != 0) {
-        // Ajouter date connexion
-        try {
-          $sql = 'UPDATE connexions SET Connexion=CURRENT_TIMESTAMP WHERE NoUtilisateur=' . $user['NoUtilisateur'];
-          $query = $mysql->cBD->prepare($sql)->execute();
-        } catch (Exception $e) {
-          die("Erreur requete sql");
-        }
         // Connexion avec session
         $_SESSION["userID"] = $user['NoUtilisateur'];
+        //Ajout du log de connexion
+        $mysql->insereEnregistrement('connexions', ['NoUtilisateur', 'Connexion'], [$_SESSION["userID"], 'CURRENT_TIMESTAMP']);
+        //Creation de la variable de session de connexion
+        $_SESSION["connexionID"] = $mysql->cBD->lastInsertId();
         accesMenuPrincipale();
       } else if ($strPassword === $user['MotDePasse'] && $user['Statut'] == 0) {
         $strErreurConnexion = "**Veuillez confirmer votre compte par adresse courriel**";
