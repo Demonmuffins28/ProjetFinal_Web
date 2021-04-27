@@ -37,6 +37,9 @@ if ($strEmail != '') {
       if ($strPassword === $user['MotDePasse'] && $user['Statut'] != 0) {
         // Connexion avec session
         $_SESSION["userID"] = $user['NoUtilisateur'];
+        //Update du nb de connexion
+        $sql = 'UPDATE utilisateurs SET NbConnexions= NbConnexions + 1 WHERE NoUtilisateur=' . $_SESSION['userID'];
+        $query = $mysql->cBD->prepare($sql)->execute();
         //Ajout du log de connexion
         $mysql->insereEnregistrement('connexions', ['NoUtilisateur', 'Connexion'], [$_SESSION["userID"], 'CURRENT_TIMESTAMP']);
         //Creation de la variable de session de connexion

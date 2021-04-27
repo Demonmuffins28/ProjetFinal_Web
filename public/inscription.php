@@ -157,7 +157,7 @@ $(document).ready(function() {
   }
   else {
     $(".formulaire").hide();
-    $("#titre").append("<h5>Votre compte à été inscrit, veuillez activer votre compte par courriel!</h5>");
+    $("#titre").append("</br></br><h5>Votre compte à été inscrit, veuillez activer votre compte par courriel!</h5>");
   }
 
 });
