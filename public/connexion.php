@@ -25,27 +25,35 @@ $strEmail = parametre("email");
 $strPassword = parametre("password");
 $strErreurConnexion = "";
 
-if($strEmail != '') {
-      $sql = 'SELECT * FROM utilisateurs WHERE Courriel=:email';
-      $query = $mysql->cBD->prepare($sql);
-      $query->bindValue(':email', $strEmail, PDO::PARAM_STR);
-      $query->execute();
-      $result = $query->fetchAll(PDO::FETCH_ASSOC);
+if ($strEmail != '') {
+  $sql = 'SELECT * FROM utilisateurs WHERE Courriel=:email';
+  $query = $mysql->cBD->prepare($sql);
+  $query->bindValue(':email', $strEmail, PDO::PARAM_STR);
+  $query->execute();
+  $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
-      if($result != null) {
-        foreach ($result as $user) {
-          if ($strPassword === $user['MotDePasse'] && $user['Statut'] != 0) {
-            $_SESSION["userID"] = $user['NoUtilisateur'];
-            accesMenuPrincipale();
-          }
-          else if($strPassword === $user['MotDePasse'] && $user['Statut'] == 0) {
-            $strErreurConnexion = "**Veuillez confirmer votre compte par adresse courriel**";
-          }
+  if ($result != null) {
+    foreach ($result as $user) {
+      if ($strPassword === $user['MotDePasse'] && $user['Statut'] != 0) {
+        // Ajouter date connexion
+        try {
+          $sql = 'UPDATE connexions SET Connexion=CURRENT_TIMESTAMP WHERE NoUtilisateur=' . $user['NoUtilisateur'];
+          $query = $mysql->cBD->prepare($sql)->execute();
+        } catch (Exception $e) {
+          die("Erreur requete sql");
         }
-      }
-      else {
+        // Connexion avec session
+        $_SESSION["userID"] = $user['NoUtilisateur'];
+        accesMenuPrincipale();
+      } else if ($strPassword === $user['MotDePasse'] && $user['Statut'] == 0) {
+        $strErreurConnexion = "**Veuillez confirmer votre compte par adresse courriel**";
+      } else {
         $strErreurConnexion = "**Le courriel ou le mot de passe n'est pas correct**";
       }
+    }
+  } else {
+    $strErreurConnexion = "**Le courriel ou le mot de passe n'est pas correct**";
+  }
 }
 ?>
 <div class="col-7 h-100">

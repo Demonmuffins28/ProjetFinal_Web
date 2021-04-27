@@ -57,4 +57,3 @@
        $preparerExec->execute([$tValeur[1],$tValeur[2],$tValeur[3],$tValeur[4],$tValeur[5],$tValeur[6],$tValeur[7],$tValeur[8],$tValeur[9]]);
     }
     $fichierAnnonces->ferme();
-?>
