@@ -91,13 +91,17 @@ if (!isset($_POST['modifApporter'])) {
   <div class="row mb-3">
     <label for="inputCourriel" class="col-sm-3 col-form-label">Courriel</label>
     <div class="col-sm-8">
-      <input type="email" class="form-control inputFields" id="inputCourriel" name="email" value="<?= $strEmail ?>">
+      <input type="email" class="form-control inputFields" id="inputCourriel" name="email" disabled
+        value="<?= $strEmail ?>">
     </div>
   </div>
   <div class="row mb-3">
     <label for="profChangPass" class="col-sm-3 col-form-label">Mot de passe</label>
     <div class="col-sm-8">
-      <button type="submit" class="btn inputFields btnPass">Clicker pour changer votre mot de passe</button>
+      <button class="btn inputFields btnPass"><a href="changerMotDePasse.php" class="inputFields"
+          style="text-decoration:none">Clicker pour
+          changer votre mot
+          de passe</a></button>
     </div>
   </div>
   <div class="row mb-3">
