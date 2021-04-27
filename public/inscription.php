@@ -6,25 +6,19 @@ require_once("envoyerMail.php");
 
 //Regarde si la page a été submit
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $strEmail = isset($_POST['email1']) ? $_POST["email1"] : null;
-  $strPassword = isset($_POST['password1']) ? $_POST["password1"] : null;
+  $strEmail = parametre('email1');
+  $strPassword = parametre('password1');
   if ($strEmail != null && $strPassword != null) {
     //Insérer l'enregistrement dans la base de données
     date_default_timezone_set("America/New_York");
     $mysql->insereEnregistrement(
       'utilisateurs',
-      ['Courriel', 'MotDePasse', 'Creation', 'NbConnexions', 'Statut'],
-      ["'" . $strEmail . "'", "'" . $strPassword . "'", "'" . date('Y-m-d H:i:s') . "'", 0, 0]
+      ['Courriel', 'MotDePasse', 'Creation', 'NbConnexions', 'Statut', 'Modification'],
+      ["'" . $strEmail . "'", "'" . $strPassword . "'", "'" . date('Y-m-d H:i:s') . "'", 0, 0, "'" . date('Y-m-d H:i:s') . "'"]
     );
-    $sql = 'SELECT NoUtilisateur FROM utilisateurs WHERE Courriel=:email';
-    $query = $mysql->cBD->prepare($sql);
-    $query->bindValue(':email', $strEmail, PDO::PARAM_STR);
-    $query->execute();
-    $result = $query->fetchAll(PDO::FETCH_ASSOC);
-    envoyerMail($strEmail, "Confirmation de votre compte", "http://localhost/ProjetFinal_Web/public/confirmationCourriel.php?id=" . $result[0]['NoUtilisateur']);
+    envoyerMail($strEmail, "Confirmation de votre compte", "http://localhost/ProjetFinal_Web/public/confirmationCourriel.php?id=" . $mysql->getNoUtilisateurs($strEmail));
   }
-  //$_SESSION['postdata'] = $_POST;
-  //unset($_POST);
+  
   header("Location: " . $_SERVER['PHP_SELF']);
   die();
 }

@@ -165,6 +165,23 @@ class mysql
   function afficheInformationsSurBD()
   {
   }
+
+   /*
+      |----------------------------------------------------------------------------------|
+      |
+      |
+      |----------------------------------------------------------------------------------|
+      */
+  function getNoUtilisateurs($strEmail) {
+    $this->requete = 'SELECT NoUtilisateur FROM utilisateurs WHERE Courriel=:email';
+    $query =  $this->cBD->prepare($this->requete);
+    $query->bindValue(':email', $strEmail, PDO::PARAM_STR);
+    $query->execute();
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $result[0]['NoUtilisateur'];
+  }
+
+
   /*
       |----------------------------------------------------------------------------------|
       | getChampsTable() #TODO Est inutile pour l'instant
