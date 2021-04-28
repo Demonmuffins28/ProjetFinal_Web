@@ -6,11 +6,14 @@ require_once("barreNavigation.php");
 require_once("libValidation.php");
 
 $strPassword = parametre("password1");
-try {
-  $sql = 'UPDATE utilisateurs SET MotDePasse=? WHERE NoUtilisateur=?';
-  $query = $mysql->cBD->prepare($sql)->execute([$strPassword, $strNumUtil]);
-} catch (Exception $e) {
-  die("Erreur dans la requete!");
+
+if (isset($_POST['modifApporter'])) {
+  try {
+    $sql = 'UPDATE utilisateurs SET MotDePasse=? WHERE NoUtilisateur=?';
+    $query = $mysql->cBD->prepare($sql)->execute([$strPassword, $strNumUtil]);
+  } catch (Exception $e) {
+    die("Erreur dans la requete!");
+  }
 }
 
 if (!isset($_POST['modifApporter'])) {

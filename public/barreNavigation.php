@@ -2,16 +2,17 @@
 session_start();
 
 require_once("classe-mysql.php");
+require_once("libValidation.php");
 
-function parametre($strIDParam, $binGet=false)
+function parametre($strIDParam, $binGet = false)
 {
-  return !$binGet ? (isset($_POST[$strIDParam]) ? ($_POST[$strIDParam] == ''? null : $_POST[$strIDParam]) : null) : 
-  (isset($_GET[$strIDParam]) ? ($_GET[$strIDParam] == ''? null : $_GET[$strIDParam]) : null);
+  return !$binGet ? (isset($_POST[$strIDParam]) ? ($_POST[$strIDParam] == '' ? null : $_POST[$strIDParam]) : null) : (isset($_GET[$strIDParam]) ? ($_GET[$strIDParam] == '' ? null : $_GET[$strIDParam]) : null);
 }
 
-$_SESSION["binConnecter"] = isset($_SESSION["binConnecter"]) ? $_SESSION["binConnecter"] : false;
+$strNumUtil = $_SESSION["userID"];
 // Si connecter redirection vers la page connexion
-if ($_SESSION["binConnecter"]) {
+function aPageConnexion()
+{
   header("Location: connexion.php");
   exit();
 }
@@ -19,19 +20,20 @@ if ($_SESSION["binConnecter"]) {
 $strInfosSensibles = "../dbconfig.php";
 $mysql = new mysql($strInfosSensibles);
 
-// Temporaire
-$strNumUtil = $_SESSION["userID"];
-
 $sql = 'SELECT Prenom, Nom, CouleurProfil FROM utilisateurs WHERE NoUtilisateur=:id';
 $query = $mysql->cBD->prepare($sql);
 $query->bindValue(':id', $strNumUtil, PDO::PARAM_STR);
 $query->execute();
 $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
-foreach ($result as $user) {
-  $strPrenom = $user["Prenom"];
-  $strNom = $user["Nom"];
-  $strCouleur = $user["CouleurProfil"];
+if (count($result) == 0) {
+  aPageConnexion();
+} else {
+  foreach ($result as $user) {
+    $strPrenom = $user["Prenom"];
+    $strNom = $user["Nom"];
+    $strCouleur = $user["CouleurProfil"];
+  }
 }
 ?>
 <!DOCTYPE html>

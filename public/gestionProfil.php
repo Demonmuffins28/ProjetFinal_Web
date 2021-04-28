@@ -91,7 +91,7 @@ if (!isset($_POST['modifApporter'])) {
   <div class="row mb-3">
     <label for="inputCourriel" class="col-sm-3 col-form-label">Courriel</label>
     <div class="col-sm-8">
-      <input type="email" class="form-control inputFields" id="inputCourriel" name="email" disabled
+      <input type="email" class="form-control inputFields" id="inputCourriel" name="email" readonly
         value="<?= $strEmail ?>">
     </div>
   </div>
