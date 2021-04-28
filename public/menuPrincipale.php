@@ -1,6 +1,10 @@
 <?php
 $binAffichageAnnonce = true;
 
+if ($_SESSION["nom"] == '' || $_SESSION["prenom"] == ''){
+  header("Location: gestionProfil.php");
+  exit();
+}
 require_once("barreNavigation.php");
 
 ?>

@@ -37,7 +37,7 @@ if (count($result) == 0) {
 }
 
 $couleurPageCourante = "orangered";
-$couleurPageNonCourante = "#0275d8"
+$couleurPageNonCourante = "#0275d8";
 ?>
 <!DOCTYPE html>
 <html lang="en">

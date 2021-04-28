@@ -13,9 +13,7 @@ require_once("accueil.php");
 
 function accesMenuPrincipale()
 {
-  if ($_SESSION["nom"] == "" || $_SESSION["nom"] == "")
-    header("Location: gestionProfil.php");
-  else header("Location: menuPrincipale.php");
+  header("Location: menuPrincipale.php");
   die();
 }
 
