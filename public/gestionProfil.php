@@ -3,7 +3,6 @@
 $binAffichageAnnonce = false;
 
 require_once("barreNavigation.php");
-require_once("libValidation.php");
 
 if (!isset($_POST['modifApporter'])) {
   $sql = 'SELECT * FROM utilisateurs WHERE NoUtilisateur=:id';

@@ -3,7 +3,7 @@
 $binAffichageAnnonce = false;
 
 require_once("barreNavigation.php");
-require_once("libValidation.php");
+
 
 $strPassword = parametre("password1");
 
