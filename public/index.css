@@ -110,3 +110,11 @@ hr {
   border-radius: 50%;
   box-shadow: 1px 4px 10px black;
 }
+
+.annonce {
+  padding: 2rem 2rem 2rem 2rem;
+}
+
+.card-img-top {
+  height: 10rem;
+}
