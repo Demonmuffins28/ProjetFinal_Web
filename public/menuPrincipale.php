@@ -5,7 +5,6 @@ require_once("barreNavigation.php");
 
 ?>
 
-
 <div class="container">
   <div class="row">
     <div class="col-sm">

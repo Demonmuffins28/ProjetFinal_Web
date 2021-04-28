@@ -13,7 +13,9 @@ require_once("accueil.php");
 
 function accesMenuPrincipale()
 {
-  header("Location: menuPrincipale.php");
+  if ($_SESSION["nom"] == "" || $_SESSION["nom"] == "")
+    header("Location: gestionProfil.php");
+  else header("Location: menuPrincipale.php");
   die();
 }
 
@@ -37,6 +39,9 @@ if ($strEmail != '') {
       if ($strPassword === $user['MotDePasse'] && $user['Statut'] != 0) {
         // Connexion avec session
         $_SESSION["userID"] = $user['NoUtilisateur'];
+        $_SESSION["email"] = $user['Courriel'];
+        $_SESSION["nom"] = $user['Nom'];
+        $_SESSION["prenom"] = $user['Prenom'];
         //Update du nb de connexion
         $sql = 'UPDATE utilisateurs SET NbConnexions= NbConnexions + 1 WHERE NoUtilisateur=' . $_SESSION['userID'];
         $query = $mysql->cBD->prepare($sql)->execute();

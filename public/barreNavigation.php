@@ -35,6 +35,9 @@ if (count($result) == 0) {
     $strCouleur = $user["CouleurProfil"];
   }
 }
+
+$couleurPageCourante = "orangered";
+$couleurPageNonCourante = "#0275d8"
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,24 +61,24 @@ if (count($result) == 0) {
 <body>
   <nav class="vertical-nav d-flex flex-column bg-dark" id="sidebar">
     <div class="px-2 py-4">
-      <p class="nav_Categories font-weight-bold text-uppercase">Main</p>
+      <p class="nav_Categories font-weight-bold text-uppercase">MENU</p>
       <hr>
       <ul class="nav flex-column">
         <li class="nav-item">
           <a href="menuPrincipale" class="nav-link text-light font-italic">
-            <i class="fa fa-th-large text-primary fa-fw"></i>
+            <i class="fa fa-th-large fa-fw" style="color:<?= $couleurPageCourante ?>"></i>
             Afficher tous les annonces
           </a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link text-light font-italic">
-            <i class="fa fa-cubes text-primary fa-fw"></i>
+            <i class="fa fa-cubes fa-fw" style="color:<?= $couleurPageNonCourante ?>"></i>
             Gérer vos annonces
           </a>
         </li>
         <li class="nav-item">
           <a href="gestionProfil.php" class="nav-link text-light font-italic">
-            <i class="fa fa-address-card text-primary fa-fw"></i>
+            <i class="fa fa-address-card fa-fw" style="color:<?= $couleurPageNonCourante ?>"></i>
             Modifié votre profil
           </a>
         </li>
@@ -95,25 +98,25 @@ if (count($result) == 0) {
       <ul class="nav flex-column ">
         <li class="nav-item">
           <a href="#" class="nav-link text-light font-italic">
-            <i class="fas fa-calendar-alt text-primary fa-fw"></i>
+            <i class="fas fa-calendar-alt fa-fw" style="color:<?= $couleurPageNonCourante ?>"></i>
             Date de parition
           </a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link text-light font-italic">
-            <i class="fas fa-archive text-primary fa-fw"></i>
+            <i class="fas fa-archive fa-fw" style="color:<?= $couleurPageNonCourante ?>"></i>
             Catégorie
           </a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link text-light font-italic">
-            <i class="fas fa-book text-primary fa-fw"></i>
+            <i class="fas fa-bookfa-fw" style="color:<?= $couleurPageNonCourante ?>"></i>
             Description abrégée
           </a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link text-light font-italic">
-            <i class="fas fa-clipboard-check text-primary fa-fw"></i>
+            <i class="fas fa-clipboard-check fa-fw" style="color:<?= $couleurPageNonCourante ?>"></i>
             État
           </a>
         </li>
