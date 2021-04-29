@@ -42,10 +42,12 @@ hr {
 }
 
 .inputFields:read-only,
+.inputFields:hover,
 .inputFields {
   background-color: rgb(100, 100, 100);
   border-color: #f0f0f0;
   color: #f0f0f0;
+  text-decoration: none;
 }
 
 .headerProfil {

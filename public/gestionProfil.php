@@ -97,10 +97,8 @@ if (!isset($_POST['modifApporter'])) {
   <div class="row mb-3">
     <label for="profChangPass" class="col-sm-3 col-form-label">Mot de passe</label>
     <div class="col-sm-8">
-      <button class="btn inputFields btnPass"><a href="changerMotDePasse.php" class="inputFields"
-          style="text-decoration:none">Clicker pour
-          changer votre mot
-          de passe</a></button>
+      <button onclick="location.href='changerMotDePasse.php'" class="btn inputFields btnPass">Cliquer pour
+        changer votre mot de passe</button>
     </div>
   </div>
   <div class="row mb-3">
