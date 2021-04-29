@@ -2,9 +2,9 @@
 -- Base de données : `pjf_macandcheese`
 --
 
-DROP DATABASE IF EXISTS pjf_macandcheese;
-CREATE DATABASE IF NOT EXISTS pjf_macandcheese;
-USE pjf_macandcheese;
+DROP DATABASE IF EXISTS pjf_macnchese;
+CREATE DATABASE IF NOT EXISTS pjf_macnchese;
+USE pjf_macnchese;
 
 -- --------------------------------------------------------
 --

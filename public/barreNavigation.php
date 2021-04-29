@@ -110,7 +110,7 @@ $couleurPageNonCourante = "#0275d8"
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link text-light font-italic">
-            <i class="fas fa-bookfa-fw" style="color:<?= $couleurPageNonCourante ?>"></i>
+            <i class="fas fa-book fa-fw" style="color:<?= $couleurPageNonCourante ?>"></i>
             Description abrégée
           </a>
         </li>

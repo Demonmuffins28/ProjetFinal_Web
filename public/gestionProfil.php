@@ -64,7 +64,7 @@ if (!isset($_POST['modifApporter'])) {
   <div class="imgProfil">
     <label id="test_wrapper" style="background:<?= $strCouleur ?>">
       <div>
-        <div class="colText">Clicker sur la couleur pour changer votre
+        <div class="colText">Cliquer sur la couleur pour changer votre
           couleur de profil</div>
         <input type="color" id="primary_color" class="field-radio" name="primary-color" value="<?= $strCouleur ?>">
       </div>
@@ -97,10 +97,7 @@ if (!isset($_POST['modifApporter'])) {
   <div class="row mb-3">
     <label for="profChangPass" class="col-sm-3 col-form-label">Mot de passe</label>
     <div class="col-sm-8">
-      <button class="btn inputFields btnPass"><a href="changerMotDePasse.php" class="inputFields"
-          style="text-decoration:none">Clicker pour
-          changer votre mot
-          de passe</a></button>
+      <input type="button" class="btn inputFields btnPass" onclick="pageMotdePasse()" value="Cliquer pour changer votre mot de passe"/>
     </div>
   </div>
   <div class="row mb-3">
@@ -196,6 +193,11 @@ if (!isset($_POST['modifApporter'])) {
 }
 ?>
 <script>
+function pageMotdePasse(){
+	location.href = "changerMotDePasse.php";
+}
+
+
 $(document).ready(function() {
   $("#primary_color").change(function() {
     $("#test_wrapper").css("background", $("#primary_color").val())

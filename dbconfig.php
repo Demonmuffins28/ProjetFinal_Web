@@ -1,5 +1,4 @@
 <?php
-    $strNomAdmin = "root";
-    $strMotPasseAdmin = "";
-    $strNomBD = "pjf_macandcheese";
-?>
+    $strNomAdmin = "MacNChese";
+    $strMotPasseAdmin = "Secret14738";
+    $strNomBD = "pjf_macnchese";
