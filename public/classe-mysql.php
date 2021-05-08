@@ -38,7 +38,7 @@ class mysql
   {
     require($this->nomFichierInfosSensibles);
     try {
-      $this->cBD = new PDO('mysql:host=localhost;dbname=' . $strNomBD, $strNomAdmin, $strMotPasseAdmin);
+      $this->cBD = new PDO('mysql:host=localhost;dbname=' . $strNomBD, $strNomAdmin, $strMotPasseAdmin, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
       $this->cBD->exec('SET NAMES "UTF8"');
     } catch (PDOException $e) {
       echo 'Erreur : ' . $e->getMessage();

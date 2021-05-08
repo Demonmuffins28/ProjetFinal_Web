@@ -3,7 +3,7 @@
     require_once("classe-fichier-2021-03-07.php");
 
     // Creation de la db
-    $cBD = new PDO("mysql:host=localhost", $strNomAdmin, $strMotPasseAdmin);
+    $cBD = new PDO("mysql:host=localhost", $strNomAdmin, $strMotPasseAdmin, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $requete = file_get_contents("pjf_macandcheese.sql");
     $preparerExec = $cBD->prepare($requete);
     $resultat = $preparerExec->execute();
