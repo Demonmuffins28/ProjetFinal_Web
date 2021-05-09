@@ -7,7 +7,7 @@
     $query->execute();
     $tCategorie = $query->fetchAll(PDO::FETCH_BOTH);
 ?>
-    <div class="container boxAjouterAnnonce col-xl-8 col-sm-10 col-12 py-4 px-5 my-5">
+    <div class="container boxAjouterAnnonce col-xl-8 col-sm-10 col-12 py-4 px-5 mt-4 mb-3">
         <h3 class="headerProfil pb-5 text-center">Ajouter une annonce</h3>
         <form class="form-inline" action="EnregistrerAnnonces.php" method="post">
 
@@ -58,7 +58,12 @@
                 <img style='height: 40%; width: 100%; object-fit: contain' src="../photos-annonce/default.jpg" class="img-thumbnail mt-4" id="idMontrerImage">              
                 <span class="invalid-feedback text-center" id="messageInvalideImage"></span>
             </div>
-
+            
+            <div class="form-group col-xl-12 col-sm-12 mt-4 row justify-content-center">
+                <hr/>
+                <input type="button" class="btn btn1 me-3 mt-3 col-xl-4 col-sm-6" id="btnPoster" value="Poster votre annonce" />
+                <input type="button" class="btn btn2 mt-3 col-xl-3 col-sm-5" id="btnAnnuler" value="Annuler" />
+            </div>
         </form>
     </div>
     <script>
