@@ -71,7 +71,7 @@ $couleurPageNonCourante = "#0275d8"
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link text-light font-italic">
+          <a href="gestionAnnonce.php" class="nav-link text-light font-italic">
             <i class="fa fa-cubes fa-fw" style="color:<?= $couleurPageNonCourante ?>"></i>
             Gérer vos annonces
           </a>

@@ -81,6 +81,9 @@ function noEmployeExiste(strNoEmpl) {
     async: false
   }).responseText
   return binNoEmp;
+}
 
+function validerPrix(fltPrix) {
+    return !isNaN(fltPrix) && fltPrix >= 0 && fltPrix <= 99999.99 && fltPrix != '';
 }
 </script>
