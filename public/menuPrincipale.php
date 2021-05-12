@@ -56,11 +56,6 @@ $result = $query->fetchAll(PDO::FETCH_BOTH);
               <li class="card-text">No Sequentiel : <?= $intNoSeq ?></li>
               <li><a href="#" class="btn btn-primary">Voir les détails</a></li>
             </ul>
-            <!-- <p class="card-text">Prix demandé : <?= $prix ?></p>
-              <a href="#" class=card-text><?= $auteur ?></a>
-              <p class="card-text">Date de parution : <?= $dateParution ?></p>
-              <p class="card-text">No de l'annonce : <?= $noAnnonce ?></p>
-              <p class="card-text">No Sequentiel : <?= $intNoSeq ?></p> -->
           </div>
 
         </div>
