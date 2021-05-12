@@ -1,0 +1,21 @@
+Amine :
+  Création de la db et insertion de données avec un seul script php.
+  Librairie de validation
+  Page oublier mot de page (fonctionnalité)
+  page confirmation compte (html + fonctionnalité)
+  Fonction pour l’envoie des emails
+
+Charles :
+  Création de la page inscription(html + fonctionnalité)
+  Création de la page oublier mot de passe(html)
+  Création de la page accueil
+  Création de fonction php dans classe-mysql pour la base de données
+  Création de la page connexion (html)
+
+Marc-Olivier :
+  Fonctionnalité de la connexion (php)
+  Création de la Barre de navigation
+  Création de la fonction et page deconnexion
+  Création de la modificaiton du profil
+  Création de la page changer mot de passe
+  Ajout des annonces temporaire

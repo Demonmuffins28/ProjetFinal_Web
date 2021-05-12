@@ -113,10 +113,33 @@ hr {
   box-shadow: 1px 4px 10px black;
 }
 
-.annonce {
-  padding: 2rem 2rem 2rem 2rem;
+.annonces {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* padding: 2rem 3rem 2rem 3rem; */
 }
 
-.card-img-top {
-  height: 10rem;
+.annonce {
+  padding: 1rem 1.5rem 1rem 1.5rem;
+}
+
+.annonces_content {
+  display: inline-flex;
+  width: 30rem;
+  height: 15rem;
+}
+
+.annonces_image {
+  margin: 5px;
+  justify-self: center;
+  align-self: center;
+}
+
+.annonce_textes {}
+
+.list_annonce {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
