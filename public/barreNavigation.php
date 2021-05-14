@@ -11,10 +11,9 @@ function parametre($strIDParam, $binGet = false)
 
 $strNumUtil = $_SESSION["userID"];
 // Si connecter redirection vers la page connexion
-function aPageConnexion()
+function redirect($pageURL)
 {
-  header("Location: connexion.php");
-  exit();
+  header($pageURL);
 }
 
 $strInfosSensibles = "../dbconfig.php";
@@ -27,7 +26,7 @@ $query->execute();
 $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
 if (count($result) == 0) {
-  aPageConnexion();
+  redirect("Location: connexion.php");
 } else {
   foreach ($result as $user) {
     $strPrenom = $user["Prenom"];
@@ -37,8 +36,26 @@ if (count($result) == 0) {
 }
 
 $couleurPageCourante = "orangered";
-$couleurPageNonCourante = "#0275d8"
+$couleurPageNonCourante = "#0275d8";
+
+// Pour le fonctions de filtrage
+// Quelle page somme nous
+if (!isset($_GET['page'])) {
+  $page = 1;
+} else $page = $_GET['page'];
+// Variable pour le nombre de resultat par page
+if (!isset($_GET['nbPage'])) {
+  $annonceParPage = 10;
+} else $annonceParPage = $_GET['nbPage'];
+// Pour le orderBy
+if (!isset($_GET['orderBy'])) {
+  $orderBy = "Parution Desc";
+} else {
+  // Ajuster les requetes pour les categories et les noms/prenoms
+  $orderBy = $_GET['orderBy'];
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,28 +114,33 @@ $couleurPageNonCourante = "#0275d8"
       <hr>
       <ul class="nav flex-column ">
         <li class="nav-item">
-          <a href="#" class="nav-link text-light font-italic">
-            <i class="fas fa-calendar-alt fa-fw" style="color:<?= $couleurPageNonCourante ?>"></i>
+          <a href="menuPrincipale.php?page=<?= $page ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy == "Parution Desc" ? "Parution Asc" : "Parution Desc" ?>"
+            class="nav-link text-light font-italic">
+            <i class="fas fa-calendar-alt fa-fw text-primary"></i>
             Date de parition
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link text-light font-italic">
-            <i class="fas fa-archive fa-fw" style="color:<?= $couleurPageNonCourante ?>"></i>
+          <a href="menuPrincipale.php?page=<?= $page ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy == "Categorie Asc" ? "Categorie Desc" : "Categorie Asc" ?>"
+            class="nav-link text-light font-italic">
+            <i class="fas fa-archive fa-fw text-primary"></i>
             Catégorie
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link text-light font-italic">
-            <i class="fas fa-book fa-fw" style="color:<?= $couleurPageNonCourante ?>"></i>
-            Description abrégée
+          <a href="menuPrincipale.php?page=<?= $page ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy == "NomPrenom Asc" ? "NomPrenom Asc" : "NomPrenom Desc" ?>"
+            class="nav-link text-light font-italic">
+            <i class="fas fa-at fa-fw text-primary"></i>
+            Auteurs
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link text-light font-italic">
-            <i class="fas fa-clipboard-check fa-fw" style="color:<?= $couleurPageNonCourante ?>"></i>
-            État
-          </a>
+          <a href="#" class="nav-link text-light font-italic"><i class="fas fa-book fa-fw text-primary"></i> Description
+            abrégée</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link text-light font-italic"> <i class="fas fa-clipboard-check fa-fw text-primary"></i>
+            État</a>
         </li>
       </ul>
     </div>
