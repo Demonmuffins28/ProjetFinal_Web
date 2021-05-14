@@ -2,7 +2,7 @@
     $binAffichageAnnonce = false;
     require_once("barreNavigation.php");
 
-    $intNoAnnonce = 27;
+    $intNoAnnonce = parametre("idAnnonce");
     
     $sql = 'SELECT * FROM categories';
     $query = $mysql->cBD->prepare($sql);
