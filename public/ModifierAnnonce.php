@@ -1,6 +1,8 @@
 <?php
     $binAffichageAnnonce = false;
     require_once("barreNavigation.php");
+
+    $intNoAnnonce = 27;
     
     $sql = 'SELECT * FROM categories';
     $query = $mysql->cBD->prepare($sql);
@@ -19,42 +21,49 @@
     $strMessage = "";
     $strCouleurMessage = "text-success";
 
-    if ($strDescriptionAbregee != null && $strDescriptionComplete != null && $intNoCategorie != null && $fltPrix != null && $intEtat != null && $strImage != null){
-        $sql = 'INSERT INTO annonces VALUES (DEFAULT,?,CURRENT_TIMESTAMP,?,?,?,?,null,CURRENT_TIMESTAMP,?)';
+    if ($strDescriptionAbregee != null && $strDescriptionComplete != null && $intNoCategorie != null && $fltPrix != null && $intEtat != null){
+        $sql = 'UPDATE annonces SET Categorie=?,DescriptionAbregee=?,DescriptionComplete=?,Prix=?,Etat=?,MiseAJour=CURRENT_TIMESTAMP WHERE NoAnnonce=?';
         $query = $mysql->cBD->prepare($sql);
-        if ($query->execute([$_SESSION["userID"], $intNoCategorie, $strDescriptionAbregee, $strDescriptionComplete, $fltPrix, $intEtat])){
-            $strImage = "imgAnnonce".$mysql->cBD->lastInsertId().".".pathinfo($_FILES["image"]["name"])['extension'];
+        if ($query->execute([$intNoCategorie, $strDescriptionAbregee, $strDescriptionComplete, $fltPrix, $intEtat, $intNoAnnonce])){
+            if ($strImage != null) {
+                $strImage = "imgAnnonce".$intNoAnnonce.".".pathinfo($_FILES["image"]["name"])['extension'];
 
-            $sql = 'UPDATE annonces SET Photo=? WHERE NoAnnonce=?';
-            $query = $mysql->cBD->prepare($sql);
-            $query->execute(["/photos-annonce/$strImage", $mysql->cBD->lastInsertId()]);
+                $sql = 'UPDATE annonces SET Photo=? WHERE NoAnnonce=?';
+                $query = $mysql->cBD->prepare($sql);
+                $query->execute(["/photos-annonce/$strImage", $intNoAnnonce]);
 
-            $imagePath = "../photos-annonce/$strImage";
-            if (!file_exists($strImage)) {
-                move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath);
+                $imagePath = "../photos-annonce/$strImage";
+                if (!file_exists($strImage)) {
+                    move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath);
+                }
+                $strMessage = "Votre annonce a bien été modifier.";
             }
-            $strMessage = "Votre annonce a bien été enregistrer.";
         }
         else{
-            $strMessage = "L'enregistrement de cette annonce n'a pas pu être effectuer";
+            $strMessage = "La modification de cette annonce n'a pas pu être effectuer";
             $strCouleurMessage = "text-danger";
         }
     }
+
+    $sql = 'SELECT * FROM annonces WHERE NoAnnonce=?';
+    $query = $mysql->cBD->prepare($sql);
+    $query->execute([$intNoAnnonce]);
+    $tAnnonce = $query->fetchAll(PDO::FETCH_BOTH)[0];
 ?>
     <div class="container boxAjouterAnnonce col-xl-8 col-sm-10 col-12 py-4 px-5 mt-4 mb-3">
-        <h3 class="headerProfil pb-5 text-center">Ajouter une annonce</h3>
+        <h3 class="headerProfil pb-5 text-center">Modification de votre annonce</h3>
         <p class="text-center <?=$strCouleurMessage?>" id="message"><?=$strMessage?></p>
-        <form class="form-inline" id="idFormAjouterAnnonce" action="AjouterAnnonce.php" method="post" enctype="multipart/form-data">
-
+        <form class="form-inline" id="idFormModifierAnnonce" action="ModifierAnnonce.php" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="idAnnonce" value="<?=$tAnnonce["NoAnnonce"]?>">
             <div class="form-group pb-3">
                 <label class="col-form-label" for="idDescriptionAbregee">Description abrégée: </label>
-                <input type="text" class="form-control" maxlength="50" id="idDescriptionAbregee" name="descriptionAbregee">
+                <input type="text" class="form-control" maxlength="50" id="idDescriptionAbregee" name="descriptionAbregee" value="<?=$tAnnonce["DescriptionAbregee"]?>">
                 <span class="invalid-feedback text-center" id="messageInvalideDescriptionAbregee"></span>
             </div>
 
             <div class="form-group py-3">
                 <label class="col-form-label" for="idDescriptionComplete">Description complète: </label>
-                <textarea type="text" height="3" rows="3" class="form-control" maxlength="250" id="idDescriptionComplete" name="descriptionComplete"></textarea>
+                <textarea type="text" height="3" rows="3" class="form-control" maxlength="250" id="idDescriptionComplete" name="descriptionComplete"><?=$tAnnonce["DescriptionComplete"]?></textarea>
                 <span class="invalid-feedback text-center" id="messageInvalideDescriptionComplete"></span>
             </div>
 
@@ -63,8 +72,11 @@
                 <select class="form-select" name="Categorie" id="idCategorie">
                     <option value=""></option>
                     <?php for ($i=0; $i<count($tCategorie); $i++){?>
-                        <option value="<?=$tCategorie[$i]["NoCategorie"]?>"><?=$tCategorie[$i]["Description"]?></option>
-                    <?php }?>
+                        <?php if ($tCategorie[$i]["NoCategorie"] == $tAnnonce["Categorie"]){?>
+                            <option value="<?=$tCategorie[$i]["NoCategorie"]?>" selected><?=$tCategorie[$i]["Description"]?></option>
+                        <?php } else{?>
+                            <option value="<?=$tCategorie[$i]["NoCategorie"]?>"><?=$tCategorie[$i]["Description"]?></option>
+                    <?php }}?>
                 </select>
                 <span class="invalid-feedback text-center" id="messageInvalideCategorie"></span>
             </div>
@@ -72,7 +84,7 @@
             <div class="form-group col-xl-4 col-sm-12 py-3">
                 <label class="col-form-label" for="idPrix">Prix: </label>
                 <div class="input-group has-validation">
-                    <input type="text" class="form-control" id="idPrix" name="prix">
+                    <input type="text" class="form-control" id="idPrix" name="prix" value="<?=$tAnnonce["Prix"]?>">
                     <span class="input-group-text">$</span>
                     <span class="invalid-feedback text-center" id="messageInvalidePrix"></span>
                 </div>
@@ -81,8 +93,8 @@
             <div class="form-group col-xl-3 col-sm-10 pb-2">
                 <label class="col-form-label" for="idEtat">État: </label>
                 <select class="form-select" name="Etat" id="idEtat">
-                    <option value="1">Actif</option>
-                    <option value="2">Inactif</option>
+                    <option value="1" <?=$tAnnonce["Etat"] == 1?"selected":""?>>Actif</option>
+                    <option value="2" <?=$tAnnonce["Etat"] == 2?"selected":""?>>Inactif</option>
                 </select>
                 <span class="invalid-feedback text-center" id="messageInvalideEtat"></span>
             </div>
@@ -90,13 +102,13 @@
             <div class="form-group col-xl-7 col-sm-12 py-3">
                 <label class="col-form-label" for="idImage">Image: </label>
                 <input type="file" class="form-control" id="idImage" name="image" accept="image/*"  onchange="montrerImage(event)"/>
-                <img style='height: 40%; width: 100%; object-fit: contain' src="../photos-annonce/default.jpg" class="img-thumbnail mt-4" id="idMontrerImage">              
+                <img style='height: 40%; width: 100%; object-fit: contain' src="../<?=$tAnnonce["Photo"]?>" class="img-thumbnail mt-4" id="idMontrerImage">              
                 <span class="invalid-feedback text-center" id="messageInvalideImage"></span>
             </div>
             
             <div class="form-group col-xl-12 col-sm-12 mt-4 row justify-content-center">
                 <hr/>
-                <input type="button" class="btn btn1 me-3 mt-3 col-xl-4 col-sm-6" id="btnPoster" value="Poster votre annonce" />
+                <input type="button" class="btn btn1 me-3 mt-3 col-xl-4 col-sm-6" id="btnModifier" value="Modifier votre annonce" />
                 <input type="button" class="btn btn2 mt-3 col-xl-3 col-sm-5" id="btnAnnuler" value="Annuler" onclick="location.href = 'gestionAnnonce.php'"/>
             </div>
         </form>
@@ -125,7 +137,7 @@
 
         // Validation
         $(document).ready(function () {
-            $('#btnPoster').click(function () {
+            $('#btnModifier').click(function () {
                 let binValider = true;
 
                 if ($('#idDescriptionAbregee').val().trim() == ''){
@@ -152,14 +164,14 @@
                     $('#messageInvalidePrix').html("Le prix entrer est invalid");
                 }else {$('#idPrix').removeClass('is-invalid');}
 
-                if ($('#idImage').val() == ''){
+                if ($('#idMontrerImage').attr('src') == '../photos-annonce/default.jpg'){
                     binValider = false;
                     $('#idImage').addClass('is-invalid');
                     $('#messageInvalideImage').html("Veuillez entrer une image pour votre annonce");
                 }else {$('#idImage').removeClass('is-invalid');}
 
                 if (binValider){
-                    $("#idFormAjouterAnnonce").submit();
+                    $("#idFormModifierAnnonce").submit();
                 }
             });
         });
