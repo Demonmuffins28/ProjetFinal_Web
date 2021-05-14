@@ -4,7 +4,7 @@ $binAffichageAnnonce = true;
 require_once("barreNavigation.php");
 
 // Variable pour images et sequence
-$urlImages = "../images/annonces/";
+$urlImages = "..";
 $intNoSeq = 1;
 
 // Requetes SQL pour les donnes de chaque annonces
