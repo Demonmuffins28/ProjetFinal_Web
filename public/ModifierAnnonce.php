@@ -36,8 +36,8 @@
                 if (!file_exists($strImage)) {
                     move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath);
                 }
-                $strMessage = "Votre annonce a bien été modifier.";
             }
+            $strMessage = "Votre annonce a bien été modifier.";
         }
         else{
             $strMessage = "La modification de cette annonce n'a pas pu être effectuer";
@@ -115,10 +115,6 @@
     </div>
 
     <script>
-        if ( window.history.replaceState ) {
-             window.history.replaceState( null, null, window.location.href );
-        }
-
         function montrerImage(event){
             if (event.target.files.length > 0){
                 if (event.target.files[0]['type'].split('/')[0] === 'image'){
