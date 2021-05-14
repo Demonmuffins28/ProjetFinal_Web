@@ -113,12 +113,23 @@ hr {
   box-shadow: 1px 4px 10px black;
 }
 
-.annonce {
-  padding: 2rem 2rem 2rem 2rem;
+.annonces {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.card-img-top {
-  height: 10rem;
+.annonce {
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+
+}
+
+.card {
+  /* border-width: 2px;
+  border-color: rgb(77, 77, 77);
+  border-radius: 5px; */
+  box-shadow: 1px 4px 10px black;
+  background-color: #212529;
 }
 
 .boxAjouterAnnonce {
@@ -144,4 +155,158 @@ hr {
 
 .btn2:hover, .btn2:focus, .btn2:active, .btn2.active, .open>.dropdown-toggle.btn {
   background-color: rgb(209, 207, 207);
+}
+
+
+.annonces_content {
+  display: flex;
+  width: 29rem;
+  height: 12rem;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.5rem;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.annonces_image {
+  margin-left: 5px;
+  justify-self: center;
+  align-self: center;
+  width: 144px;
+  max-height: 10rem;
+  box-shadow: 1px 4px 10px black;
+}
+
+.annonce_textes {
+  width: 100%;
+  height: 100%;
+}
+
+.list_annonce {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  color: #f0f0f0;
+}
+
+.card-text:last-child {
+  margin-top: auto;
+}
+
+.vertical-line {
+  border-left: 3px solid #f0f0f0;
+  display: inline-block;
+  height: 100%;
+  margin: 0 5px 0 20px;
+}
+
+.titreAnnonce {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.titreAnnonceLink {
+  text-decoration: none;
+  color: #0B5ED7;
+}
+
+.titreAnnonceLink:hover {
+  text-decoration: none;
+  color: orangered;
+}
+
+.nomPrenomLien {
+  text-decoration: none;
+  color: orangered;
+}
+
+.noPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: auto;
+  align-items: center;
+}
+
+.lienPage {
+  margin: 0 3px;
+  font-weight: 600;
+}
+
+.lienPageActive {
+  background-color: orangered;
+  border-color: orangered;
+}
+
+.lienPageActive:hover {
+  background-color: orangered;
+  border-color: orangered;
+}
+
+.changePage {
+  margin: 0 6px;
+  transform: scale(1.5);
+  color: #f0f0f0;
+}
+
+.changePage:hover {
+  color: orangered;
+}
+
+/* Drop down pour le nombre d'annonces par pages */
+.dropbtn {
+  background-color: #0B5ED7;
+  color: white;
+  padding: 5px 10px;
+  font-size: 12px;
+  border: none;
+  margin: 2rem 0 3px 0;
+  border-radius: 5px;
+  width: 10rem;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown_content {
+  display: none;
+  position: absolute;
+  background-color: #f0f0f0;
+  font-size: 12px;
+  width: 10rem;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  bottom: 35px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.dropdown_content a {
+  color: black;
+  padding: 5px 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown_content a:hover {
+  background-color: rgb(184, 184, 184);
+  border-radius: 5px;
+}
+
+.dropdown:hover .dropdown_content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: orangered;
 }
