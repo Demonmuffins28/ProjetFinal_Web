@@ -7,8 +7,18 @@ require_once("barreNavigation.php");
 $urlImages = "..";
 $intNoSeq = 1;
 
+if ($orderBy == "NomPrenom Desc") {
+  $orderBy = "Nom Desc, Prenom Desc";
+} else if ($orderBy == "NomPrenom Asc") {
+  $orderBy = "Nom Asc, Prenom Asc";
+} else if ($orderBy == "Categorie Asc") {
+  $orderBy = "Description Asc";
+} else if ($orderBy == "Categorie Desc") {
+  $orderBy = "Description Desc";
+}
+
 // Requetes SQL pour les donnes de chaque annonces
-$sql = 'SELECT * FROM annonces WHERE Etat=:Etat ORDER BY ' . $orderBy;
+$sql = 'SELECT * FROM annonces a INNER JOIN utilisateurs u ON u.NoUtilisateur = a.NoUtilisateur INNER JOIN categories c ON c.NoCategorie = a.Categorie WHERE Etat=:Etat ' . $recherche . ' ORDER BY ' . $orderBy;
 $query = $mysql->cBD->prepare($sql);
 $query->bindValue(':Etat', "1", PDO::PARAM_STR);
 $query->execute();
@@ -24,7 +34,7 @@ $limitAffichagePage = ($page - 1) * $annonceParPage;
 // Verifier si on est pas dans un page dans le vide ************************BUG AVEC Changement entre page ***********************
 if ($page > $nbPages) {
   $page = $nbPages;
-  redirect("Refresh:0; url=menuPrincipale.php?page=$page&nbPage=$annonceParPage&orderBy=$orderBy");
+  //redirect("Refresh:0; url=menuPrincipale.php?page=$page&nbPage=$annonceParPage&orderBy=$orderBy");
 }
 ?>
 <div class="annonces">
@@ -40,16 +50,7 @@ if ($page > $nbPages) {
     $prix = $result[$i][6] . "$";
     if ($prix == "0.00$") $prix = "N/A";
     $photo = $urlImages . $result[$i][7];
-
-    // Recherche du nom et prenom de l'auteur
-    $sql = 'SELECT Prenom, Nom FROM utilisateurs WHERE NoUtilisateur=:ID';
-    $query = $mysql->cBD->prepare($sql);
-    $query->bindValue(':ID', $noUtil, PDO::PARAM_STR);
-    $query->execute();
-    $nomPrenom = $query->fetchAll(PDO::FETCH_BOTH);
-    foreach ($nomPrenom as $nomAuteur) {
-      $auteur = $nomAuteur[0] . " " . $nomAuteur[1];
-    }
+    $auteur = $result[$i]['Nom'] . " " . $result[$i]['Prenom'];
 
     // Recherche du nom de la categorie
     $sql = 'SELECT `Description` FROM categories WHERE NoCategorie=:ID';
@@ -94,31 +95,34 @@ if ($page > $nbPages) {
 <div class='noPage'>
   <div class="dropdown">
     <div class="dropdown_content">
-      <a href="menuPrincipale.php?nbPage=20&page=<?= $page ?>">20 par page</a>
-      <a href="menuPrincipale.php?nbPage=15&page=<?= $page ?>">15 par page</a>
-      <a href="menuPrincipale.php?nbPage=10&page=<?= $page ?>">10 par page</a>
-      <a href="menuPrincipale.php?nbPage=5&page=<?= $page ?>">5 par page</a>
+      <a href="menuPrincipale.php?nbPage=20&page=<?= $page ?>&orderBy=<?= $orderBy ?>">20 par page</a>
+      <a href="menuPrincipale.php?nbPage=15&page=<?= $page ?>&orderBy=<?= $orderBy ?>">15 par page</a>
+      <a href="menuPrincipale.php?nbPage=10&page=<?= $page ?>&orderBy=<?= $orderBy ?>">10 par page</a>
+      <a href="menuPrincipale.php?nbPage=5&page=<?= $page ?>&orderBy=<?= $orderBy ?>">5 par page</a>
     </div>
     <button class="dropbtn">Annonces par page [<?= $annonceParPage ?>]</button>
   </div>
   <div>
-    <a class="" href="menuPrincipale.php?page=<?= 1 ?>&nbPage=<?= $annonceParPage ?>"><i
+    <a class=""
+      href="menuPrincipale.php?page=<?= 1 ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy ?>&recherche=<?= $recherche ?>"><i
         class="fas fa-angle-double-left changePage"></i></a>
-    <a class="" href="menuPrincipale.php?page=<?= $page == 1 ? 1 : $page - 1 ?>&nbPage=<?= $annonceParPage ?>"><i
+    <a class=""
+      href="menuPrincipale.php?page=<?= $page == 1 ? 1 : $page - 1 ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy ?>&recherche=<?= $recherche ?>"><i
         class="fas fa-angle-left changePage" style="transform: scale(2)"></i></a>
 
     <?php
     for ($i = 1; $i <= $nbPages; $i++) {
       if ($i == $page)
-        echo "<a class='lienPage lienPageActive btn btn-primary' href='menuPrincipale.php?page=" . $i . '&nbPage=' . $annonceParPage . "'>" . $i . " </a>";
+        echo "<a class='lienPage lienPageActive btn btn-primary' href='menuPrincipale.php?page=" . $i . '&nbPage=' . $annonceParPage . "&orderBy=" . $orderBy . "&recherche=" . $recherche . "'>" . $i . " </a>";
       else
-        echo "<a class='lienPage btn btn-primary' href='menuPrincipale.php?page=" . $i . '&nbPage=' . $annonceParPage . "'>" . $i . " </a>";
+        echo "<a class='lienPage btn btn-primary' href='menuPrincipale.php?page=" . $i . '&nbPage=' . $annonceParPage . "&orderBy=" . $orderBy . "'>" . $i . " </a>";
     }
     ?>
     <a class=""
-      href="menuPrincipale.php?page=<?= $page == $nbPages ? $nbPages : $page + 1 ?>&nbPage=<?= $annonceParPage ?>"><i
+      href="menuPrincipale.php?page=<?= $page == $nbPages ? $nbPages : $page + 1 ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy ?>"><i
         class="fas fa-angle-right changePage" style="transform: scale(2)"></i></a>
-    <a class="" href="menuPrincipale.php?page=<?= $nbPages ?>&nbPage=<?= $annonceParPage ?>"><i
+    <a class=""
+      href="menuPrincipale.php?page=<?= $nbPages ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy ?>&recherche=<?= $recherche ?>"><i
         class="fas fa-angle-double-right changePage"></i></a>
   </div>
 </div>
