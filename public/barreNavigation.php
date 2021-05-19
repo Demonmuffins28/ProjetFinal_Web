@@ -119,7 +119,7 @@ if (isset($_GET['recherche']) && $_GET['recherche'] != "") {
       <hr>
       <ul class="nav flex-column ">
         <li class="nav-item">
-          <a href="menuPrincipale.php?page=<?= $page ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy == "Parution Asc" ? "Parution Desc" : "Parution Asc" ?>&recherche=<?= $recherche ?>"
+          <a href="<?= $strPageActive ?>?page=<?= $page ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy == "Parution Asc" ? "Parution Desc" : "Parution Asc" ?>&recherche=<?= $recherche ?>"
             class="nav-link text-light font-italic">
             <i class="fas fa-calendar-alt fa-fw text-primary"></i>
             Date de parition
@@ -131,7 +131,7 @@ if (isset($_GET['recherche']) && $_GET['recherche'] != "") {
 
         </li>
         <li class="nav-item">
-          <a href="menuPrincipale.php?page=<?= $page ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy == "Categorie Asc" ? "Categorie Desc" : "Categorie Asc" ?>&recherche=<?= $recherche ?>"
+          <a href="<?= $strPageActive ?>?page=<?= $page ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy == "Categorie Asc" ? "Categorie Desc" : "Categorie Asc" ?>&recherche=<?= $recherche ?>"
             class="nav-link text-light font-italic">
             <i class="fas fa-archive fa-fw text-primary"></i>
             Catégorie
@@ -142,7 +142,21 @@ if (isset($_GET['recherche']) && $_GET['recherche'] != "") {
           </a>
         </li>
         <li class="nav-item">
-          <a href="menuPrincipale.php?page=<?= $page ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy == "NomPrenom Asc" ? "NomPrenom Desc" : "NomPrenom Asc" ?>&recherche=<?= $recherche ?>"
+          <a href="<?= $strPageActive ?>?page=<?= $page ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy == "Description Asc" ? "Description Desc" : "Description Asc" ?>&recherche=<?= $recherche ?>"
+            class="nav-link text-light font-italic">
+            <i class="fas fa-copy fa-fw text-primary"></i>
+            Descriptions
+            <i class="fas fa-arrow-alt-circle-up"
+              style="color:<?= $orderBy == "Description Asc" ? $couleurPageCourante : $couleur2ePageNonCourante ?>"></i>
+            <i class="fas fa-arrow-alt-circle-down"
+              style="color:<?= $orderBy == "Description Desc" ? $couleurPageCourante : $couleur2ePageNonCourante ?>"></i>
+          </a>
+        </li>
+        <?php
+          if ($strPageActive == "menuPrincipale.php") {
+          ?>
+        <li class="nav-item">
+          <a href="<?= $strPageActive ?>?page=<?= $page ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy == "NomPrenom Asc" ? "NomPrenom Desc" : "NomPrenom Asc" ?>&recherche=<?= $recherche ?>"
             class="nav-link text-light font-italic">
             <i class="fas fa-at fa-fw text-primary"></i>
             Auteurs
@@ -152,27 +166,27 @@ if (isset($_GET['recherche']) && $_GET['recherche'] != "") {
               style="color:<?= $orderBy == "NomPrenom Desc" ? $couleurPageCourante : $couleur2ePageNonCourante ?>"></i>
           </a>
         </li>
+        <?php
+          } else {
+          ?>
+        <li class="nav-item">
+          <a href="<?= $strPageActive ?>?page=<?= $page ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy == "Etat Asc" ? "Etat Desc" : "Etat Asc" ?>&recherche=<?= $recherche ?>"
+            class="nav-link text-light font-italic">
+            <i class="fas fa-unlock fa-fw text-primary"></i>
+            État des annonces
+            <i class="fas fa-arrow-alt-circle-up"
+              style="color:<?= $orderBy == "Etat Asc" ? $couleurPageCourante : $couleur2ePageNonCourante ?>"></i>
+            <i class="fas fa-arrow-alt-circle-down"
+              style="color:<?= $orderBy == "Etat Desc" ? $couleurPageCourante : $couleur2ePageNonCourante ?>"></i>
+          </a>
+        </li>
+        <?php } ?>
         <li>
           <form class="d-flex" style="transform: scale(0.9)">
             <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Recherche"
               name="recherche">
             <button class="btn btn-outline-primary" type="submit">Rechercher</button>
           </form>
-        </li>
-      </ul>
-    </div>
-    <div class="px-2 py-4">
-      <p class="nav_Categories font-weight-bold text-uppercase">Autres</p>
-      <hr>
-      <ul class="nav flex-column ">
-        <li class="nav-item">
-          <a href="#" class="nav-link text-light font-italic"><i class="fas fa-book fa-fw text-primary"></i>
-            Description
-            abrégée</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link text-light font-italic"> <i class="fas fa-clipboard-check fa-fw text-primary"></i>
-            État</a>
         </li>
       </ul>
     </div>
