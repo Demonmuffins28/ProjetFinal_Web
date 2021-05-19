@@ -45,7 +45,6 @@ CREATE TABLE IF NOT EXISTS `connexions` (
   CONSTRAINT `FK_NoUtilisateur_Connexions` FOREIGN KEY (`NoUtilisateur`) REFERENCES `utilisateurs` (`NoUtilisateur`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-
 --
 -- Structure de la table `categories`
 --
@@ -77,3 +76,7 @@ CREATE TABLE IF NOT EXISTS `annonces` (
   CONSTRAINT `FK_NoUtilisateur_Annonces` FOREIGN KEY (`NoUtilisateur`) REFERENCES `utilisateurs` (`NoUtilisateur`),
   CONSTRAINT `Categorie` FOREIGN KEY (`Categorie`) REFERENCES `categories` (`NoCategorie`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+INSERT INTO `utilisateurs` 
+(`NoUtilisateur`, `Courriel`, `MotDePasse`, `Creation`, `NbConnexions`, `Statut`, `NoEmpl`, `Nom`, `Prenom`, `NoTelMaison`, `NoTelTravail`, `NoTelCellulaire`, `Modification`, `AutresInfos`, `CouleurProfil`) 
+VALUES (NULL, 'admin@gmail.com', 'Secret123', CURRENT_TIMESTAMP(), '0', '1', '1', 'Admin', 'Site', NULL, NULL, NULL, CURRENT_TIMESTAMP(), "Admin de l'application", '#e66465')
