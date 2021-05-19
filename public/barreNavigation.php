@@ -153,10 +153,10 @@ if (isset($_GET['recherche']) && $_GET['recherche'] != "") {
           </a>
         </li>
         <li>
-          <form class="d-flex">
+          <form class="d-flex" style="transform: scale(0.9)">
             <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Recherche"
               name="recherche">
-            <button class="btn btn-outline-success" type="submit">Rechercher</button>
+            <button class="btn btn-outline-primary" type="submit">Rechercher</button>
           </form>
         </li>
       </ul>
