@@ -35,8 +35,10 @@ if (count($result) == 0) {
   }
 }
 
+$strPageActive = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], "/") + 1);
 $couleurPageCourante = "orangered";
 $couleurPageNonCourante = "#0275d8";
+$couleur2ePageNonCourante = "#f0f0f0";
 
 // Pour le fonctions de filtrage
 // Quelle page somme nous
@@ -53,6 +55,12 @@ if (!isset($_GET['orderBy'])) {
 } else {
   // Ajuster les requetes pour les categories et les noms/prenoms
   $orderBy = $_GET['orderBy'];
+}
+if (isset($_GET['recherche']) && $_GET['recherche'] != "") {
+  $recherche = "'%" . $_GET['recherche'] . "%'";
+  $recherche = " AND (Parution Like " . $recherche . " OR Nom Like " . $recherche . " OR Prenom Like " . $recherche . " OR Description Like " . $recherche . " OR DescriptionAbregee Like " . $recherche . ")";
+} else {
+  $recherche = "";
 }
 ?>
 
@@ -83,28 +91,25 @@ if (!isset($_GET['orderBy'])) {
       <ul class="nav flex-column">
         <li class="nav-item">
           <a href="menuPrincipale" class="nav-link text-light font-italic">
-            <i class="fa fa-th-large fa-fw" style="color:<?= $couleurPageCourante ?>"></i>
+            <i class="fa fa-th-large fa-fw"
+              style="color:<?= $strPageActive == "menuPrincipale.php" ? $couleurPageCourante : $couleurPageNonCourante ?>"></i>
             Afficher tous les annonces
           </a>
         </li>
         <li class="nav-item">
           <a href="gestionAnnonce.php" class="nav-link text-light font-italic">
-            <i class="fa fa-cubes fa-fw" style="color:<?= $couleurPageNonCourante ?>"></i>
+            <i class="fa fa-cubes fa-fw"
+              style="color:<?= $strPageActive == "gestionAnnonce.php" ? $couleurPageCourante : $couleurPageNonCourante ?>"></i>
             Gérer vos annonces
           </a>
         </li>
-        <li class="nav-item">
+        <li class=" nav-item">
           <a href="gestionProfil.php" class="nav-link text-light font-italic">
-            <i class="fa fa-address-card fa-fw" style="color:<?= $couleurPageNonCourante ?>"></i>
+            <i class="fa fa-address-card fa-fw"
+              style="color:<?= $strPageActive == "gestionProfil.php" ? $couleurPageCourante : $couleurPageNonCourante ?>"></i>
             Modifié votre profil
           </a>
         </li>
-        <!-- <li class="nav-item">
-          <a href="#" class="nav-link text-light font-italic">
-            <i class="fa fa-picture-o text-primary fa-fw"></i>
-            Gallery
-          </a>
-        </li> -->
       </ul>
     </div>
 
@@ -114,28 +119,55 @@ if (!isset($_GET['orderBy'])) {
       <hr>
       <ul class="nav flex-column ">
         <li class="nav-item">
-          <a href="menuPrincipale.php?page=<?= $page ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy == "Parution Desc" ? "Parution Asc" : "Parution Desc" ?>"
+          <a href="menuPrincipale.php?page=<?= $page ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy == "Parution Asc" ? "Parution Desc" : "Parution Asc" ?>&recherche=<?= $recherche ?>"
             class="nav-link text-light font-italic">
             <i class="fas fa-calendar-alt fa-fw text-primary"></i>
             Date de parition
+            <i class="fas fa-arrow-alt-circle-up"
+              style="color:<?= $orderBy == "Parution Asc" ? $couleurPageCourante : $couleur2ePageNonCourante ?>"></i>
+            <i class="fas fa-arrow-alt-circle-down"
+              style="color:<?= $orderBy == "Parution Desc" ? $couleurPageCourante : $couleur2ePageNonCourante ?>"></i>
           </a>
+
         </li>
         <li class="nav-item">
-          <a href="menuPrincipale.php?page=<?= $page ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy == "Categorie Asc" ? "Categorie Desc" : "Categorie Asc" ?>"
+          <a href="menuPrincipale.php?page=<?= $page ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy == "Categorie Asc" ? "Categorie Desc" : "Categorie Asc" ?>&recherche=<?= $recherche ?>"
             class="nav-link text-light font-italic">
             <i class="fas fa-archive fa-fw text-primary"></i>
             Catégorie
+            <i class="fas fa-arrow-alt-circle-up"
+              style="color:<?= $orderBy == "Categorie Asc" ? $couleurPageCourante : $couleur2ePageNonCourante ?>"></i>
+            <i class="fas fa-arrow-alt-circle-down"
+              style="color:<?= $orderBy == "Categorie Desc" ? $couleurPageCourante : $couleur2ePageNonCourante ?>"></i>
           </a>
         </li>
         <li class="nav-item">
-          <a href="menuPrincipale.php?page=<?= $page ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy == "NomPrenom Asc" ? "NomPrenom Asc" : "NomPrenom Desc" ?>"
+          <a href="menuPrincipale.php?page=<?= $page ?>&nbPage=<?= $annonceParPage ?>&orderBy=<?= $orderBy == "NomPrenom Asc" ? "NomPrenom Desc" : "NomPrenom Asc" ?>&recherche=<?= $recherche ?>"
             class="nav-link text-light font-italic">
             <i class="fas fa-at fa-fw text-primary"></i>
             Auteurs
+            <i class="fas fa-arrow-alt-circle-up"
+              style="color:<?= $orderBy == "NomPrenom Asc" ? $couleurPageCourante : $couleur2ePageNonCourante ?>"></i>
+            <i class="fas fa-arrow-alt-circle-down"
+              style="color:<?= $orderBy == "NomPrenom Desc" ? $couleurPageCourante : $couleur2ePageNonCourante ?>"></i>
           </a>
         </li>
+        <li>
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Recherche"
+              name="recherche">
+            <button class="btn btn-outline-success" type="submit">Rechercher</button>
+          </form>
+        </li>
+      </ul>
+    </div>
+    <div class="px-2 py-4">
+      <p class="nav_Categories font-weight-bold text-uppercase">Autres</p>
+      <hr>
+      <ul class="nav flex-column ">
         <li class="nav-item">
-          <a href="#" class="nav-link text-light font-italic"><i class="fas fa-book fa-fw text-primary"></i> Description
+          <a href="#" class="nav-link text-light font-italic"><i class="fas fa-book fa-fw text-primary"></i>
+            Description
             abrégée</a>
         </li>
         <li class="nav-item">
@@ -144,6 +176,7 @@ if (!isset($_GET['orderBy'])) {
         </li>
       </ul>
     </div>
+
     <?php } ?>
     <div class="px-3 mt-auto">
       <div class="media d-flex align-items-center px-2">
