@@ -70,115 +70,117 @@ if (!isset($_POST['modifApporter'])) {
       </div>
     </label>
   </div>
-  <div id="divinscription" class="row mb-5">
-    <div class="col-sm-8">
-      <h1 class="headerProfil">Modifier votre profil</h1>
+  <div>
+    <div id="divinscription" class="row mb-5">
+      <div class="col-sm-8">
+        <h1 class="headerProfil">Modifier votre profil</h1>
+      </div>
     </div>
-  </div>
-  <div class="row mb-3">
-    <label for="inputNom" class="col-sm-3 col-form-label">Nom de famille</label>
-    <div class="col-sm-8">
-      <input type="text" class="form-control inputFields" id="inputNom" name="nom" value="<?= $strNom ?>">
+    <div class="row mb-3">
+      <label for="inputNom" class="col-sm-3 col-form-label">Nom de famille</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control inputFields" id="inputNom" name="nom" value="<?= $strNom ?>">
+      </div>
     </div>
-  </div>
-  <div class="row mb-3">
-    <label for="inputPrenom" class="col-sm-3 col-form-label">Prénom</label>
-    <div class="col-sm-8">
-      <input type="text" class="form-control inputFields" id="inputPrenom" name="prenom" value="<?= $strPrenom ?>">
+    <div class="row mb-3">
+      <label for="inputPrenom" class="col-sm-3 col-form-label">Prénom</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control inputFields" id="inputPrenom" name="prenom" value="<?= $strPrenom ?>">
+      </div>
     </div>
-  </div>
-  <div class="row mb-3">
-    <label for="inputCourriel" class="col-sm-3 col-form-label">Courriel</label>
-    <div class="col-sm-8">
-      <input type="email" class="form-control inputFields" id="inputCourriel" name="email" readonly
-        value="<?= $strEmail ?>">
+    <div class="row mb-3">
+      <label for="inputCourriel" class="col-sm-3 col-form-label">Courriel</label>
+      <div class="col-sm-8">
+        <input type="email" class="form-control inputFields" id="inputCourriel" name="email" readonly
+          value="<?= $strEmail ?>">
+      </div>
     </div>
-  </div>
-  <div class="row mb-3">
-    <label for="profChangPass" class="col-sm-3 col-form-label">Mot de passe</label>
-    <div class="col-sm-8">
-      <input type="button" class="btn inputFields btnPass" onclick="location.href='ChangerMotDePasse.php'"
-        value="Cliquer pour changer votre mot de passe" />
+    <div class="row mb-3">
+      <label for="profChangPass" class="col-sm-3 col-form-label">Mot de passe</label>
+      <div class="col-sm-8">
+        <input type="button" class="btn inputFields btnPass" onclick="location.href='ChangerMotDePasse.php'"
+          value="Cliquer pour changer votre mot de passe" />
+      </div>
     </div>
-  </div>
-  <div class="row mb-3">
-    <label for="inputTeleMaison" class="col-sm-3 col-form-label">Téléphone à la maison
-      <br />(facultatif)
-    </label>
-    <div class="col-sm-8">
-      <input type="text" class="form-control inputFields" id="inputTeleMaison" name="telMaison"
-        value="<?= $strTelMaison ?>">
-      <input class="telCheck" type="checkbox" id="gridCheckMaison" name="checkMaison" <?= $strCheckMaison ?>>
-      <label class="telCheck" for="gridCheckMaison">
-        Rendre cette information public lors de l'affichage d'annonce?
+    <div class="row mb-3">
+      <label for="inputTeleMaison" class="col-sm-3 col-form-label">Téléphone à la maison
+        <br />(facultatif)
       </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control inputFields" id="inputTeleMaison" name="telMaison"
+          value="<?= $strTelMaison ?>">
+        <input class="telCheck" type="checkbox" id="gridCheckMaison" name="checkMaison" <?= $strCheckMaison ?>>
+        <label class="telCheck" for="gridCheckMaison">
+          Rendre cette information public lors de l'affichage d'annonce?
+        </label>
+      </div>
     </div>
-  </div>
-  <div class="row mb-3">
-    <label for="inputTeleTravail" class="col-sm-4 col-form-label">Téléphone (poste) au travail
-      <br />(facultatif)</label>
-    <div class="col-sm-7">
-      <input type="text" class="form-control inputFields" id="inputTeleTravail" name="telTravail"
-        value="<?= $strTelTravail ?>">
-      <input class="telCheck" type="checkbox" id="gridCheckTravail" name="checkTravail" <?= $strCheckTravail ?>>
-      <label class="telCheck" for="gridCheckTravail">
-        Rendre cette information public lors de l'affichage d'annonce?
-      </label>
+    <div class="row mb-3">
+      <label for="inputTeleTravail" class="col-sm-4 col-form-label">Téléphone (poste) au travail
+        <br />(facultatif)</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control inputFields" id="inputTeleTravail" name="telTravail"
+          value="<?= $strTelTravail ?>">
+        <input class="telCheck" type="checkbox" id="gridCheckTravail" name="checkTravail" <?= $strCheckTravail ?>>
+        <label class="telCheck" for="gridCheckTravail">
+          Rendre cette information public lors de l'affichage d'annonce?
+        </label>
+      </div>
     </div>
-  </div>
-  <div class="row mb-3">
-    <label for="inputCellulaire" class="col-sm-3 col-form-label">Téléphone cellulaire <br />(facultatif)</label>
-    <div class="col-sm-8">
-      <input type="text" class="form-control inputFields" id="inputCellulaire" name="telCellulaire"
-        value="<?= $strTelCellulaire ?>">
-      <input class="telCheck" type="checkbox" id="gridCheckCellulaire" name="checkCellulaire"
-        <?= $strCheckCellulaire ?>>
-      <label class="telCheck" for="gridCheckCellulaire">
-        Rendre cette information public lors de l'affichage d'annonce?
-      </label>
+    <div class="row mb-3">
+      <label for="inputCellulaire" class="col-sm-3 col-form-label">Téléphone cellulaire <br />(facultatif)</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control inputFields" id="inputCellulaire" name="telCellulaire"
+          value="<?= $strTelCellulaire ?>">
+        <input class="telCheck" type="checkbox" id="gridCheckCellulaire" name="checkCellulaire"
+          <?= $strCheckCellulaire ?>>
+        <label class="telCheck" for="gridCheckCellulaire">
+          Rendre cette information public lors de l'affichage d'annonce?
+        </label>
+      </div>
     </div>
-  </div>
-  <div class="row mb-3">
-    <label for="selectStatut" class="col-sm-3 col-form-label">Statut de l'employé (facultatif)</label>
-    <div class="col-sm-8">
-      <?php
-        // Ajuster le statut de l'employer pour celui dans la base de donnee
-        $select9 = $select2 = $select3 = $select4 = $select5 = "";
-        switch ($strStatut) {
-          case '9':
-            $select9 = "selected";
-            break;
-          case '2':
-            $select2 = "selected";
-            break;
-          case '3':
-            $select3 = "selected";
-            break;
-          case '4':
-            $select4 = "selected";
-            break;
-          case '5':
-            $select5 = "selected";
-            break;
-        }
-        ?>
-      <select id="idStatut" class="form-select inputFields" name=statut>
-        <option value="9" <?= $select9 ?>></option>
-        <option value="2" <?= $select2 ?>>Cadre</option>
-        <option value="3" <?= $select3 ?>>Employé de soutien</option>
-        <option value="4" <?= $select4 ?>>Enseigant</option>
-        <option value="5" <?= $select5 ?>>Professionnel</option>
-      </select>
+    <div class="row mb-3">
+      <label for="selectStatut" class="col-sm-3 col-form-label">Statut de l'employé (facultatif)</label>
+      <div class="col-sm-8">
+        <?php
+          // Ajuster le statut de l'employer pour celui dans la base de donnee
+          $select9 = $select2 = $select3 = $select4 = $select5 = "";
+          switch ($strStatut) {
+            case '9':
+              $select9 = "selected";
+              break;
+            case '2':
+              $select2 = "selected";
+              break;
+            case '3':
+              $select3 = "selected";
+              break;
+            case '4':
+              $select4 = "selected";
+              break;
+            case '5':
+              $select5 = "selected";
+              break;
+          }
+          ?>
+        <select id="idStatut" class="form-select inputFields" name=statut>
+          <option value="9" <?= $select9 ?>></option>
+          <option value="2" <?= $select2 ?>>Cadre</option>
+          <option value="3" <?= $select3 ?>>Employé de soutien</option>
+          <option value="4" <?= $select4 ?>>Enseigant</option>
+          <option value="5" <?= $select5 ?>>Professionnel</option>
+        </select>
+      </div>
     </div>
-  </div>
-  <div class="row mb-3">
-    <label for="numeroEmpl" class="col-sm-3 col-form-label">Numéro de l'employé (facultatif)</label>
-    <div class="col-sm-8">
-      <input type="text" class="form-control inputFields" id="numeroEmpl" name="numeroEmpl" value="<?= $strNoEmpl ?>">
+    <div class="row mb-3">
+      <label for="numeroEmpl" class="col-sm-3 col-form-label">Numéro de l'employé (facultatif)</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control inputFields" id="numeroEmpl" name="numeroEmpl" value="<?= $strNoEmpl ?>">
+      </div>
     </div>
+    <button type="submit" class="btn btn-primary" id="btnSubmit" name="modifApporter">Ajouter les
+      modifications</button>
   </div>
-  <button type="submit" class="btn btn-primary" id="btnSubmit" name="modifApporter">Ajouter les
-    modifications</button>
 </form>
 <?php
 } else {

@@ -15,6 +15,10 @@ if ($orderBy == "NomPrenom Desc") {
   $orderBy = "Description Asc";
 } else if ($orderBy == "Categorie Desc") {
   $orderBy = "Description Desc";
+} else if ($orderBy == "Description Asc") {
+  $orderBy = "DescriptionAbregee Asc";
+} else if ($orderBy == "Description Desc") {
+  $orderBy = "DescriptionAbregee Desc";
 }
 
 // Requetes SQL pour les donnes de chaque annonces
