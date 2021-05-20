@@ -42,6 +42,8 @@ if ($strEmail != '') {
         $_SESSION["email"] = $user['Courriel'];
         $_SESSION["nom"] = $user['Nom'];
         $_SESSION["prenom"] = $user['Prenom'];
+        $_SESSION["statut"] = $user['Statut'];
+
         //Update du nb de connexion
         $sql = 'UPDATE utilisateurs SET NbConnexions= NbConnexions + 1 WHERE NoUtilisateur=' . $_SESSION['userID'];
         $query = $mysql->cBD->prepare($sql)->execute();

@@ -310,3 +310,7 @@ hr {
 .dropdown:hover .dropbtn {
   background-color: orangered;
 }
+
+.hide{
+  display: none;
+}

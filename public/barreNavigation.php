@@ -62,6 +62,10 @@ if (isset($_GET['recherche']) && $_GET['recherche'] != "") {
 } else {
   $recherche = "";
 }
+
+
+// Page admin 
+$binAdmin = $_SESSION["statut"] == 1;
 ?>
 
 <!DOCTYPE html>
@@ -96,20 +100,37 @@ if (isset($_GET['recherche']) && $_GET['recherche'] != "") {
             Afficher tous les annonces
           </a>
         </li>
-        <li class="nav-item">
-          <a href="gestionAnnonce.php" class="nav-link text-light font-italic">
-            <i class="fa fa-cubes fa-fw"
-              style="color:<?= $strPageActive == "gestionAnnonce.php" ? $couleurPageCourante : $couleurPageNonCourante ?>"></i>
-            Gérer vos annonces
-          </a>
-        </li>
-        <li class=" nav-item">
-          <a href="gestionProfil.php" class="nav-link text-light font-italic">
-            <i class="fa fa-address-card fa-fw"
-              style="color:<?= $strPageActive == "gestionProfil.php" ? $couleurPageCourante : $couleurPageNonCourante ?>"></i>
-            Modifié votre profil
-          </a>
-        </li>
+        <?php if (!$binAdmin) {?>
+          <li class="nav-item">
+            <a href="gestionAnnonce.php" class="nav-link text-light font-italic">
+              <i class="fa fa-cubes fa-fw"
+                style="color:<?= $strPageActive == "gestionAnnonce.php" ? $couleurPageCourante : $couleurPageNonCourante ?>"></i>
+              Gérer vos annonces
+            </a>
+          </li>
+          <li class=" nav-item">
+            <a href="gestionProfil.php" class="nav-link text-light font-italic">
+              <i class="fa fa-address-card fa-fw"
+                style="color:<?= $strPageActive == "gestionProfil.php" ? $couleurPageCourante : $couleurPageNonCourante ?>"></i>
+              Modifié votre profil
+            </a>
+          </li>
+        <?php } else {?>
+          <li class="nav-item">
+            <a href="AffichageUtilisateurs.php" class="nav-link text-light font-italic">
+              <i class="fa fa-cubes fa-fw"
+                style="color:<?= $strPageActive == "AffichageUtilisateurs.php" ? $couleurPageCourante : $couleurPageNonCourante ?>"></i>
+                Affichage des utilisateurs
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="NettoyageBaseDeDonnee.php" class="nav-link text-light font-italic">
+              <i class="fa fa-address-card fa-fw"
+                style="color:<?= $strPageActive == "NettoyageBaseDeDonnee.php" ? $couleurPageCourante : $couleurPageNonCourante ?>"></i>
+                Nettoyage des données
+            </a>
+          </li>
+        <?php }?>
       </ul>
     </div>
 
