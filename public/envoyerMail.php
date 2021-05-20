@@ -8,6 +8,7 @@
 
         function envoyerMail($strDestinataire, $strSujet, $strContenu){
             $mail = new PHPMailer(true);
+            $mail->CharSet = "UTF-8";
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;

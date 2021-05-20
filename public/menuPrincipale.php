@@ -80,9 +80,11 @@ if ($page > $nbPages) {
             </h5>
             <ul class="list_annonce">
               <li class="card-text">Prix demandé : <?= $prix ?></li>
-              <form id="idFormContact<?=$noUtil?>" class="m-0" method="POST" action="Contact.php">
+              <form id="idFormContact<?=$noAnnonce?>" class="m-0" method="POST" action="Contact.php">
                 <input type="hidden" name="noUtilisateur" value="<?=$noUtil?>">
-                <li class="card-text"><a href="#" onclick="document.getElementById('idFormContact<?=$noUtil?>').submit()" class="nomPrenomLien"><?= $auteur ?></a></li>
+                <input type="hidden" name="titre" value="<?=$descAbregee?>">
+                <input type="hidden" name="prix" value="<?=$prix?>">
+                <li class="card-text"><a href="#" onclick="document.getElementById('idFormContact<?=$noAnnonce?>').submit()" class="nomPrenomLien"><?= $auteur ?></a></li>
               </form>
               <li class="card-text">Catégorie : <?= $descCategorie ?></li>
               <li class="card-text"><?= $intNoSeq . "S." . $noAnnonce . "A." . $dateParution ?></li>
