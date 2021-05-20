@@ -8,17 +8,17 @@ $urlImages = "..";
 $intNoSeq = 1;
 
 if ($orderBy == "Categorie Asc") {
-    $orderBy = "Description Asc";
+  $orderBy = "Description Asc";
 } else if ($orderBy == "Categorie Desc") {
-    $orderBy = "Description Desc";
+  $orderBy = "Description Desc";
 } else if ($orderBy == "Etat Asc") {
-    $orderBy = "Etat Asc";
+  $orderBy = "Etat Asc";
 } else if ($orderBy == "Etat Desc") {
-    $orderBy = "Etat Desc";
+  $orderBy = "Etat Desc";
 } else if ($orderBy == "Description Asc") {
-    $orderBy = "DescriptionAbregee Asc";
+  $orderBy = "DescriptionAbregee Asc";
 } else if ($orderBy == "Description Desc") {
-    $orderBy = "DescriptionAbregee Desc";
+  $orderBy = "DescriptionAbregee Desc";
 }
 
 // Requetes SQL pour les donnes de chaque annonces
@@ -30,29 +30,31 @@ $result = $query->fetchAll(PDO::FETCH_BOTH);
 ?>
 <div class="annonces">
   <?php
-    foreach ($result as $annonce) {
-        $noAnnonce = $annonce[0];
-        $noUtil = $annonce[1];
-        $dateParution = $annonce[2];
-        $dateParution = substr($dateParution, 0, 10);
-        $categorie = $annonce[3];
-        $descAbregee = $annonce[4];
-        $descComplete = $annonce[5];
-        $prix = $annonce[6] . "$";
-        if ($prix == "0.00$") $prix = "N/A";
-        $photo = $urlImages . $annonce[7];
-        $auteur = $annonce['Nom'] . " " . $annonce['Prenom'];
+  foreach ($result as $annonce) {
+    $noAnnonce = $annonce[0];
+    $noUtil = $annonce[1];
+    $dateParution = $annonce[2];
+    $dateParution = substr($dateParution, 0, 10);
+    $categorie = $annonce[3];
+    $descAbregee = $annonce[4];
+    $descComplete = $annonce[5];
+    $prix = $annonce[6] . "$";
+    if ($prix == "0.00$") $prix = "N/A";
+    $photo = $urlImages . $annonce[7];
+    $auteur = $annonce['Nom'] . " " . $annonce['Prenom'];
+    $etat = $annonce['Etat'] == 1 ? 'Actif' : 'Inactif';
+    $couleurEtat = $annonce['Etat'] == 1 ? 'lime' : 'red';
 
-        // Recherche du nom de la categorie
-        $sql = 'SELECT `Description` FROM categories WHERE NoCategorie=:ID';
-        $query = $mysql->cBD->prepare($sql);
-        $query->bindValue(':ID', $categorie, PDO::PARAM_STR);
-        $query->execute();
-        $nomCategorie = $query->fetchAll(PDO::FETCH_BOTH);
-        foreach ($nomCategorie as $cat) {
-            $descCategorie = $cat[0];
-        }
-    ?>
+    // Recherche du nom de la categorie
+    $sql = 'SELECT `Description` FROM categories WHERE NoCategorie=:ID';
+    $query = $mysql->cBD->prepare($sql);
+    $query->bindValue(':ID', $categorie, PDO::PARAM_STR);
+    $query->execute();
+    $nomCategorie = $query->fetchAll(PDO::FETCH_BOTH);
+    foreach ($nomCategorie as $cat) {
+      $descCategorie = $cat[0];
+    }
+  ?>
 
   <div class="annonce">
     <div class="card">
@@ -67,7 +69,7 @@ $result = $query->fetchAll(PDO::FETCH_BOTH);
             </h5>
             <ul class="list_annonce">
               <li class="card-text">Prix demandé : <?= $prix ?></li>
-              <li class="card-text"><a href="#" class="nomPrenomLien"><?= $auteur ?></a></li>
+              <li class="card-text" style="color: <?= $couleurEtat ?>"><?= $etat ?></li>
               <li class="card-text">Catégorie : <?= $descCategorie ?></li>
               <li class="card-text"><?= $intNoSeq . "S." . $noAnnonce . "A." . $dateParution ?></li>
               <li class="card-text">
@@ -91,9 +93,9 @@ $result = $query->fetchAll(PDO::FETCH_BOTH);
   </div>
 
   <?php
-        $intNoSeq++;
-    }
-    ?>
+    $intNoSeq++;
+  }
+  ?>
 </div>
 <button type="button" class="btn btn-primary big-blue-button" onclick="location.href='AjouterAnnonce.php'">
   <i class="fas fa-plus" style="font-size: xxx-large;"></i>
