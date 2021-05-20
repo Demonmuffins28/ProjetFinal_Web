@@ -76,14 +76,52 @@ if (isset($_GET['recherche']) && $_GET['recherche'] != "") {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="index.css">
+  <link rel="stylesheet" type="text/css" href="slideNav.css">
 
   <script defer src="../node_modules/@fortawesome/fontawesome-free/js/brands.js"></script>
   <script defer src="../node_modules/@fortawesome/fontawesome-free/js/solid.js"></script>
   <script defer src="../node_modules/@fortawesome/fontawesome-free/js/fontawesome.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    petiteEcran()
+  })
+
+  function petiteEcran() {
+    if ($(window).width() <= 790) {
+      $("#sidebar").removeClass("vertical-nav")
+      $("#sidebar").addClass("sidenav")
+      $("#hiddenNavigation").css("display", "inherit")
+      $('body').css("padding-left", "3rem")
+    } else {
+      $("#sidebar").addClass("vertical-nav")
+      $("#sidebar").removeClass("sidenav")
+      $("#sidebar").removeClass("sidenavOpen")
+      $("#hiddenNavigation").addClass("hiddenNavButton")
+      $("#hiddenNavigation").css("display", "none")
+      $('body').css("padding-left", "20rem")
+    }
+  }
+
+  /* Set the width of the side navigation to 250px */
+  function openNav() {
+    if ($("#sidebar").hasClass("sidenav")) {
+      $("#sidebar").addClass("sidenavOpen")
+      $("#sidebar").removeClass("sidenav")
+      $("#hiddenNavigation").addClass("hiddenNavButtonRight")
+      $("#hiddenNavigation").removeClass("hiddenNavButton")
+    } else {
+      $("#sidebar").removeClass("sidenavOpen")
+      $("#sidebar").addClass("sidenav")
+      $("#hiddenNavigation").removeClass("hiddenNavButtonRight")
+      $("#hiddenNavigation").addClass("hiddenNavButton")
+    }
+
+  }
+  </script>
 </head>
 
-<body>
+<body onresize="petiteEcran()">
   <nav class="vertical-nav d-flex flex-column bg-dark" id="sidebar">
     <div class="px-2 py-4">
       <p class="nav_Categories font-weight-bold text-uppercase">MENU</p>
@@ -182,7 +220,7 @@ if (isset($_GET['recherche']) && $_GET['recherche'] != "") {
         </li>
         <?php } ?>
         <li>
-          <form class="d-flex" style="transform: scale(0.9)">
+          <form class="d-flex" style="transform: scale(0.9); max-width: 20rem">
             <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Recherche"
               name="recherche">
             <button class="btn btn-outline-primary" type="submit">Rechercher</button>
@@ -210,3 +248,9 @@ if (isset($_GET['recherche']) && $_GET['recherche'] != "") {
       </a>
     </div>
   </nav>
+  <button id="hiddenNavigation" class="hiddenNavButton btn" onclick="openNav()" style="display:none">
+    <p class="petitDivMenu">M</p>
+    <p class="petitDivMenu">E</p>
+    <p class="petitDivMenu">N</p>
+    <p class="petitDivMenu">U</p>
+  </button>
