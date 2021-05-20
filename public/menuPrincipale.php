@@ -35,10 +35,10 @@ $nbPages = ceil($intNbAnnonce / $annonceParPage);
 // Limiter le nombre de page a afficher
 $limitAffichagePage = ($page - 1) * $annonceParPage;
 
-// Verifier si on est pas dans un page dans le vide ************************BUG AVEC Changement entre page ***********************
+// Verifier si on est pas dans un page dans le vide
 if ($page > $nbPages) {
   $page = $nbPages;
-  //redirect("Refresh:0; url=menuPrincipale.php?page=$page&nbPage=$annonceParPage&orderBy=$orderBy");
+  echo "<script> window.location.href='menuPrincipale.php?page=$page&nbPage=$annonceParPage&orderBy=$orderBy' </script>";
 }
 ?>
 <div class="annonces">
@@ -80,17 +80,18 @@ if ($page > $nbPages) {
             </h5>
             <ul class="list_annonce">
               <li class="card-text">Prix demandé : <?= $prix ?></li>
-              <form id="idFormContact<?=$noAnnonce?>" class="m-0" method="POST" action="Contact.php">
-                <input type="hidden" name="noUtilisateur" value="<?=$noUtil?>">
-                <input type="hidden" name="titre" value="<?=$descAbregee?>">
-                <input type="hidden" name="prix" value="<?=$prix?>">
-                <li class="card-text"><a href="#" onclick="document.getElementById('idFormContact<?=$noAnnonce?>').submit()" class="nomPrenomLien"><?= $auteur ?></a></li>
+              <form id="idFormContact<?= $noAnnonce ?>" class="m-0" method="POST" action="Contact.php">
+                <input type="hidden" name="noUtilisateur" value="<?= $noUtil ?>">
+                <input type="hidden" name="titre" value="<?= $descAbregee ?>">
+                <input type="hidden" name="prix" value="<?= $prix ?>">
+                <li class="card-text"><a href="#"
+                    onclick="document.getElementById('idFormContact<?= $noAnnonce ?>').submit()"
+                    class="nomPrenomLien"><?= $auteur ?></a></li>
               </form>
               <li class="card-text">Catégorie : <?= $descCategorie ?></li>
               <li class="card-text"><?= $intNoSeq . "S." . $noAnnonce . "A." . $dateParution ?></li>
             </ul>
           </div>
-
         </div>
       </div>
     </div>
