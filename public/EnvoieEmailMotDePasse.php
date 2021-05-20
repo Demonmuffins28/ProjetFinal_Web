@@ -13,7 +13,7 @@ if ($strEmail != null) {
     if (count($result) == 0) {
         echo false;
     } else {
-        envoyerMail($strEmail, "Demande de changement de mot de passe", "Suivre le lien pour changer votre mot de passe : " . "http://localhost/ProjetFinal_Web/public/changerOublierMotDePasse.php?id=" . $mysql->getNoUtilisateurs($strEmail));
+        envoyerMail($strEmail, "Demande de changement de mot de passe", "Suivre le lien pour changer votre mot de passe : " . "http://localhost/ProjetFinal_Web/public/changerOublierMotDePasse.php?id=" . base64_encode($mysql->getNoUtilisateurs($strEmail)));
         echo true;
     }
 } else {

@@ -9,7 +9,7 @@ $strInfosSensibles = "../dbconfig.php";
 $mysql = new mysql($strInfosSensibles);
 
 $strPassword = parametre("password1");
-if (isset($_GET["id"])) $strNumUtil = $_GET["id"];
+if (isset($_GET["id"])) $strNumUtil = base64_decode($_GET["id"]);
 $strNumUser = parametre("idUtil");
 
 if (isset($_POST['modifApporter'])) {
