@@ -75,7 +75,9 @@ $miseAJour = str_replace(":", "h", $miseAJour);
       <div class="row pt-4">
         <div class="col-9">
           <form id="idFormContact<?=$noUtil?>" class="m-0" method="POST" action="Contact.php">
-            <input type="hidden" name="noUtilisateur" value="<?=$noUtil?>">
+          <input type="hidden" name="noUtilisateur" value="<?= $noUtil ?>">
+                <input type="hidden" name="titre" value="<?= $titre ?>">
+                <input type="hidden" name="prix" value="<?= $prix ?>">
             <a href="#" style="text-decoration: none;" onclick="document.getElementById('idFormContact<?=$noUtil?>').submit()"><h4 class="link-warning"><i class="fas fa-user"></i> <?=$auteur?></h4></a>
           </form>
           <h5><i class="fas fa-home"></i> : <?=$telMaison?></h5>
@@ -87,7 +89,6 @@ $miseAJour = str_replace(":", "h", $miseAJour);
           <h5><i class="fas fa-clock"></i> <?=$miseAJour?></h5>
         </div>
       <div>
-
         </div>
       </div>
     </div>

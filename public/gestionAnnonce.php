@@ -78,7 +78,7 @@ $result = $query->fetchAll(PDO::FETCH_BOTH);
                     <input type="hidden" name="idAnnonce" value="<?= $noAnnonce ?>">
                     <button class="btn btn-outline-primary" type="submit">Modifier annonce</button>
                   </form>
-                  <form class="form_supp_annonce" action="annonceDetaillee.php" method="post">
+                  <form class="form_supp_annonce" action="retirerAnnonce.php" method="post">
                     <input type="hidden" name="idAnnonce" value="<?= $noAnnonce ?>">
                     <input type="hidden" name="supprimer" value="true">
                     <button class="btn btn-outline-danger" type="submit">Supprimer annonce</button>
@@ -91,7 +91,7 @@ $result = $query->fetchAll(PDO::FETCH_BOTH);
       </div>
     </div>
   </div>
-
+  
   <?php
     $intNoSeq++;
   }
