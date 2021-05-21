@@ -76,8 +76,10 @@ if ($page > $nbPages) {
         <div class="vertical-line"></div>
         <div class="annonce_textes">
           <div class="card-body">
-            <h5 class="card-title titreAnnonce" dir="rtl"><a href="#" class="titreAnnonceLink"><?= $descAbregee ?></a>
-            </h5>
+          <form id="idFormAnnonceDetaille<?=$noAnnonce?>" class="m-0" method="POST" action="annonceDetaille.php">
+            <input type="hidden" name="idAnnonce" value="<?=$noAnnonce?>">
+            <h5 class="card-title titreAnnonce" dir="rtl"><a href="#" onclick="document.getElementById('idFormAnnonceDetaille<?=$noAnnonce?>').submit()" class="titreAnnonceLink"><?= $descAbregee ?></a></h5>
+          </form>
             <ul class="list_annonce">
               <li class="card-text">Prix demandé : <?= $prix ?></li>
               <form id="idFormContact<?= $noAnnonce ?>" class="m-0" method="POST" action="Contact.php">
