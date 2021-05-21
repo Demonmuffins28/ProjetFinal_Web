@@ -22,7 +22,7 @@ if ($orderBy == "Categorie Asc") {
 }
 
 // Requetes SQL pour les donnes de chaque annonces
-$sql = 'SELECT * FROM annonces a INNER JOIN utilisateurs u ON u.NoUtilisateur = a.NoUtilisateur INNER JOIN categories c ON c.NoCategorie = a.Categorie WHERE a.NoUtilisateur=:ID ' . $recherche . ' ORDER BY ' . $orderBy;
+$sql = 'SELECT * FROM annonces a INNER JOIN utilisateurs u ON u.NoUtilisateur = a.NoUtilisateur INNER JOIN categories c ON c.NoCategorie = a.Categorie WHERE Etat != 3 AND a.NoUtilisateur=:ID ' . $recherche . ' ORDER BY ' . $orderBy;
 $query = $mysql->cBD->prepare($sql);
 $query->bindValue(':ID', $strNumUtil, PDO::PARAM_STR);
 $query->execute();
@@ -91,7 +91,7 @@ $result = $query->fetchAll(PDO::FETCH_BOTH);
       </div>
     </div>
   </div>
-  
+
   <?php
     $intNoSeq++;
   }
